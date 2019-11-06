@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.9.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>io.github.toquery</groupId>
+    <artifactId>example-spring-cloud-kubernetes</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+    <name>spring-cloud-kubernetes-demo</name>
+
+    <description>Demo project for Spring Boot</description>
+
+
+    <modules>
+        <module>servers</module>
+        <module>clouds</module>
+    </modules>
+
+    <properties>
+        <java.version>11</java.version>
+        <spring-boot-admin.version>2.1.5</spring-boot-admin.version>
+        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+
+
+        <!--docker 容器相关-->
+        <!--
+        <docker.image.prefix>toquery</docker.image.prefix>
+        -->
+
+        <docker.image.prefix>toquery</docker.image.prefix>
+
+        <docker.image.jar>${project.build.finalName}.jar</docker.image.jar>
+        <docker.image.file.directory>${project.basedir}/src/main/docker</docker.image.file.directory>
+        <docker.image.name>demo-k8s-${project.artifactId}</docker.image.name>
+        <docker.image.tag>${project.version}</docker.image.tag>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-dependencies</artifactId>
+                <version>${spring-boot-admin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>1.4.4</version>
+                    <configuration>
+                        <!--docker 镜像名称：仓库地址/景象名称:版本号-->
+                        <repository>${docker.image.prefix}/${docker.image.name}</repository>
+
+                        <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
+                        <!-- -->
+                        <contextDirectory>${project.build.directory}</contextDirectory>
+                        <!--<dockerInfoDirectory>${project.basedir}/src/main/docker</dockerInfoDirectory>-->
+                        <!--镜像版本号-->
+                        <tag>${docker.image.tag}</tag>
+                        <buildArgs>
+                            <!--与dockerfile文件内容相呼应-->
+                            <!--
+                            <JAVA_BASE>${docker.base.java}</JAVA_BASE>
+                            <JAR_BASE>${docker.base.jar}</JAR_BASE>
+                            -->
+                            <JAR_FILE>${docker.image.jar}</JAR_FILE>
+                        </buildArgs>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>docker_build_and_push</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>build</goal>
+                                <goal>push</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.plexus</groupId>
+                            <artifactId>plexus-archiver</artifactId>
+                            <version>3.4</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>javax.activation</groupId>
+                            <artifactId>javax.activation-api</artifactId>
+                            <version>1.2.0</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/docker</directory>
+                <targetPath>${project.build.directory}</targetPath>
+            </resource>
+        </resources>
+    </build>
+
+</project>
