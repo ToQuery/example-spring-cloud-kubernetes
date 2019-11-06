@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>example-spring-cloud-kubernetes-clouds</artifactId>
+
+
+    <name>Spring Cloud Kubernetes :: Clouds</name>
+
     <packaging>pom</packaging>
 
     <modules>

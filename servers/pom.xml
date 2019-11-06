@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>example-spring-cloud-kubernetes-servers</artifactId>
+    <name>Spring Cloud Kubernetes :: Servers</name>
     <packaging>pom</packaging>
 
     <modules>
@@ -17,6 +18,5 @@
         <module>account</module>
         <module>movie</module>
     </modules>
-
 
 </project>

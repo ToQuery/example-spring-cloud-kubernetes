@@ -14,42 +14,45 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
-    <name>spring-cloud-kubernetes-demo</name>
+
+    <name>Spring Cloud Kubernetes</name>
 
     <description>Demo project for Spring Boot</description>
 
 
     <modules>
-        <module>servers</module>
         <module>clouds</module>
+        <module>servers</module>
     </modules>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
         <spring-boot-admin.version>2.1.5</spring-boot-admin.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
-
 
         <!--docker 容器相关-->
         <!--
         <docker.image.prefix>toquery</docker.image.prefix>
         -->
-
         <docker.image.prefix>toquery</docker.image.prefix>
 
         <docker.image.jar>${project.build.finalName}.jar</docker.image.jar>
         <docker.image.file.directory>${project.basedir}/src/main/docker</docker.image.file.directory>
-        <docker.image.name>demo-k8s-${project.artifactId}</docker.image.name>
+        <docker.image.name>${project.artifactId}</docker.image.name>
         <docker.image.tag>${project.version}</docker.image.tag>
+
+        <fabric8.maven.plugin.version>4.3.1</fabric8.maven.plugin.version>
     </properties>
 
-    <dependencies>
+   <!--
+   <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>
+    -->
 
     <dependencyManagement>
         <dependencies>
@@ -119,8 +122,32 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>fabric8-maven-plugin</artifactId>
+                    <version>${fabric8.maven.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>fmp</id>
+                            <goals>
+                                <goal>resource</goal>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <enricher>
+                            <config>
+                                <fmp-service>
+                                    <type>NodePort</type>
+                                </fmp-service>
+                            </config>
+                        </enricher>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
+
         <resources>
             <resource>
                 <directory>src/main/docker</directory>
@@ -129,4 +156,6 @@
         </resources>
     </build>
 
+    <profiles>
+    </profiles>
 </project>
