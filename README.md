@@ -36,3 +36,5 @@ spring-cloud-kubernetes-hello-world-load-balancer   LoadBalancer   10.101.144.30
 
 - 访问 `http://localhost:8080` 即可 `Hello World`
 - 访问 `http://localhost:8080/services` 可查看所有注册的服务
+- 访问 `http://localhost:8080/services/{name}`  可查看 `name` 服务的信息
+- 访问 `http://localhost:8080/configs/message` 获取项目配置信息，或k8s的config-map配置
