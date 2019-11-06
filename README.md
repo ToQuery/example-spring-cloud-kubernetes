@@ -1,8 +1,6 @@
 # spring-cloud-kubernetes
 
-## 快速使用
-
-快速查看 Hello World 服务
+## 快速使用 Hello World 服务
 
 ```shell script
 cd servers/hello-world

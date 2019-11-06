@@ -1,0 +1,20 @@
+server:
+  port: 8082
+
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+
+spring:
+  application:
+    name: example-spring-cloud-kubernetes-server-movie
+
+  cloud:
+    kubernetes:
+      client:
+        namespace: ${NAMESPACE:default}

@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+
+spring:
+  application:
+    name: example-spring-cloud-kubernetes-server-hello-world
+
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+        mode: polling
+        period: 5000
+      config:
+        sources:
+          - name: ${spring.application.name}
+      client:
+        namespace: ${NAMESPACE:default}

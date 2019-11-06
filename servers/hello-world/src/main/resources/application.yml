@@ -1,3 +1,2 @@
-spring:
-  application:
-    name: example-spring-cloud-kubernetes-server-hello-world
+app:
+  message: this is a message from config file

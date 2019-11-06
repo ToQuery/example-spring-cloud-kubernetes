@@ -139,7 +139,8 @@
                         <enricher>
                             <config>
                                 <fmp-service>
-                                    <type>NodePort</type>
+                                    <!--<type>NodePort</type>-->
+                                    <type>LoadBalancer</type>
                                 </fmp-service>
                             </config>
                         </enricher>
