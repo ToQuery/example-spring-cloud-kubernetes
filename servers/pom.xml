@@ -14,7 +14,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>hello-world</module>
         <module>account</module>
         <module>movie</module>
     </modules>

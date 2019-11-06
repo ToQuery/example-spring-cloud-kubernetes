@@ -3,15 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>example-spring-cloud-kubernetes-servers</artifactId>
+        <artifactId>example-spring-cloud-kubernetes</artifactId>
         <groupId>io.github.toquery</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>example-spring-cloud-kubernetes-server-hello-world</artifactId>
+    <artifactId>example-spring-cloud-kubernetes-hello-world</artifactId>
+    <name>Spring Cloud Kubernetes :: HelloWorld</name>
 
-    <name>Spring Cloud Kubernetes :: Server :: HelloWorld</name>
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -89,21 +89,5 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-           <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>fabric8-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

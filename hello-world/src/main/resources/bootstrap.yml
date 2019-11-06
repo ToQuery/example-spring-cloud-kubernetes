@@ -12,7 +12,7 @@ management:
 
 spring:
   application:
-    name: example-spring-cloud-kubernetes-server-hello-world
+    name: example-spring-cloud-kubernetes-hello-world
 
   cloud:
     kubernetes:
