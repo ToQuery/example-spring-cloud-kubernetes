@@ -149,11 +149,14 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
         <resources>
             <resource>
                 <directory>src/main/docker</directory>
                 <targetPath>${project.build.directory}/docker</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/k8s</directory>
+                <targetPath>${project.build.directory}/kubernetes</targetPath>
             </resource>
         </resources>
     </build>
