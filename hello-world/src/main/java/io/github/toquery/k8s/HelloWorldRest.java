@@ -1,6 +1,7 @@
 package io.github.toquery.k8s;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
@@ -10,21 +11,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-public class HelloWorldController {
+public class HelloWorldRest {
 
     @Resource
     private AppConfig appConfig;
+
+    @Value("${spring.application.name:example-spring-cloud-kubernetes-hello-world}")
+    private String appName;
 
     @Resource
     private DiscoveryClient discoveryClient;
 
     @RequestMapping("/")
-    public String hello() {
-        return "Hello World";
+    public Map<String, Object> hello() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("app", "Hello World");
+        map.put("app.message", appConfig.getMessage());
+        map.put("spring.application.name", appName);
+        Map<String, List<ServiceInstance>> services = this.discoveryClient.getServices().stream()
+                .collect(Collectors.toMap(item -> item, item -> discoveryClient.getInstances(item), (oldValue, newValue) -> {
+                    oldValue.addAll(newValue);
+                    return oldValue;
+                }));
+        map.put("services", services);
+        return map;
     }
 
 

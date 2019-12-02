@@ -82,6 +82,8 @@
                     <artifactId>dockerfile-maven-plugin</artifactId>
                     <version>1.4.4</version>
                     <configuration>
+                        <useMavenSettingsForAuth>false</useMavenSettingsForAuth>
+                        <!--<serverId>docker-hub</serverId>-->
                         <!--docker 镜像名称：仓库地址/景象名称:版本号-->
                         <repository>${docker.image.prefix}/${docker.image.name}</repository>
 
@@ -152,12 +154,14 @@
         <resources>
             <resource>
                 <directory>src/main/docker</directory>
-                <targetPath>${project.build.directory}/docker</targetPath>
+                <targetPath>${project.build.directory}</targetPath>
             </resource>
-            <resource>
-                <directory>src/main/k8s</directory>
-                <targetPath>${project.build.directory}/kubernetes</targetPath>
-            </resource>
+        <!--
+        <resource>
+            <directory>src/main/k8s</directory>
+            <targetPath>${project.build.directory}/kubernetes</targetPath>
+        </resource>
+         -->
         </resources>
     </build>
 
