@@ -15,5 +15,6 @@ public class MovieDto {
 
     private String name;
 
+    private String summary;
 
 }

@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: turbine-server
+  labels:
+    app: turbine-server
+spec:
+  type: NodePort
+  ports:
+    - port: 8989
+  selector:
+    app: turbine-server
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: turbine-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: turbine-server
+  template:
+    metadata:
+      labels:
+        app: turbine-server
+    spec:
+      containers:
+      - name: turbine-server
+        image: 192.168.99.100:5000/turbine-server
+        ports:
+        - containerPort: 8989
+        env:
+        - name: CONFIG_SERVER_URL
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: config-server-url
+        volumeMounts:
+        - name: log-vol
+          mountPath: /var/log/msdemo
+      volumes:
+      - name: log-vol
+        persistentVolumeClaim:
+          claimName: log-claim

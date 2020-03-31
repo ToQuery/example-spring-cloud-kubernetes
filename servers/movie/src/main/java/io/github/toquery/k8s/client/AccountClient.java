@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@FeignClient(name = "example-spring-cloud-kubernetes-server-movie")
+@FeignClient(name = "example-spring-cloud-kubernetes-server-account")
 public interface AccountClient {
 
 

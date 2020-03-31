@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-config
+data:
+  app-config-dir: "/etc/msdemo"
+  app-logging-dir: "/var/log/msdemo"
+  config-server-url: http://config-server:8888
+  service-registry-url: http://service-registry:8761/eureka/
+  rabbitmq-host: rabbitmq

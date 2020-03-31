@@ -15,4 +15,6 @@ public class AccountEntity {
 
     private String name;
 
+    private String phone;
+
 }

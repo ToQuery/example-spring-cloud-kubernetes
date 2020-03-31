@@ -15,5 +15,7 @@ public class MovieEntity {
 
     private String name;
 
+    private String summary;
+
 
 }
