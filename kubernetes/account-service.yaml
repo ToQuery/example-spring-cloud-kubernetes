@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: account-service
-        image: 192.168.99.100:5000/account-service
+        image: toquery/account-service
         ports:
         - containerPort: 9010
         env:

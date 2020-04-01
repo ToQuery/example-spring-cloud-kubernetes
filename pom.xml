@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
+        <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>io.github.toquery</groupId>
@@ -29,29 +29,29 @@
 
     <properties>
         <java.version>8</java.version>
-        <spring-boot-admin.version>2.2.0</spring-boot-admin.version>
-        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
+        <spring-boot-admin.version>2.2.2</spring-boot-admin.version>
+        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
 
         <!--docker 容器相关-->
         <docker.image.prefix>toquery</docker.image.prefix>
 
         <docker.image.jar>${project.build.finalName}.jar</docker.image.jar>
-        <docker.image.file.directory>${project.basedir}/src/main/docker</docker.image.file.directory>
+        <docker.image.file.directory>${project.basedir}</docker.image.file.directory>
         <docker.image.name>${project.artifactId}</docker.image.name>
         <docker.image.tag>${project.version}</docker.image.tag>
 
         <fabric8.maven.plugin.version>4.3.1</fabric8.maven.plugin.version>
     </properties>
 
-   <!--
-   <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
-    -->
+    <!--
+    <dependencies>
+         <dependency>
+             <groupId>org.projectlombok</groupId>
+             <artifactId>lombok</artifactId>
+             <optional>true</optional>
+         </dependency>
+     </dependencies>
+     -->
 
     <dependencyManagement>
         <dependencies>
@@ -73,6 +73,31 @@
     </dependencyManagement>
 
     <build>
+        <plugins>
+            <!--
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            -->
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -155,21 +180,22 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <!--
         <resources>
             <resource>
                 <directory>src/main/docker</directory>
                 <targetPath>${project.build.directory}</targetPath>
             </resource>
-        <!--
-        <resource>
-            <directory>src/main/k8s</directory>
-            <targetPath>${project.build.directory}/kubernetes</targetPath>
-        </resource>
-         -->
+            <resource>
+                <directory>src/main/k8s</directory>
+                <targetPath>${project.build.directory}/kubernetes</targetPath>
+            </resource>
         </resources>
+        -->
     </build>
 
     <profiles>
+        <!--
         <profile>
             <id>jar</id>
             <activation>
@@ -177,7 +203,7 @@
             </activation>
             <build>
                 <plugins>
-                    <!--jar包构建-->
+                    &lt;!&ndash;jar包构建&ndash;&gt;
                     <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -185,28 +211,9 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>docker</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <!--jar包构建
-                    <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
-                    </plugin>-->
-                    <!--docker构建。!!!!!!docker构建插件放到所有插件最后!!!!!!-->
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+        -->
 
-        <!--只构建jar包-->
+        <!--只构建jar包
         <profile>
             <id>kubernetes</id>
             <activation>
@@ -214,7 +221,7 @@
             </activation>
             <build>
                 <plugins>
-                    <!--jar包构建
+                    jar包构建
                     <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -223,7 +230,7 @@
                     <plugin>
                         <groupId>com.spotify</groupId>
                         <artifactId>dockerfile-maven-plugin</artifactId>
-                    </plugin>-->
+                    </plugin>
                     <plugin>
                         <groupId>io.fabric8</groupId>
                         <artifactId>fabric8-maven-plugin</artifactId>
@@ -231,5 +238,6 @@
                 </plugins>
             </build>
         </profile>
+        -->
     </profiles>
 </project>
