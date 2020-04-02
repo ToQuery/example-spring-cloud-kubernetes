@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-spring-cloud-kubernetes-hello-world
+  labels:
+    app: example-spring-cloud-kubernetes-hello-world
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+  selector:
+    app: example-spring-cloud-kubernetes-hello-world
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-spring-cloud-kubernetes-hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-spring-cloud-kubernetes-hello-world
+  template:
+    metadata:
+      labels:
+        app: example-spring-cloud-kubernetes-hello-world
+    spec:
+      containers:
+      - name: example-spring-cloud-kubernetes-hello-world
+        image: toquery/example-spring-cloud-kubernetes-hello-world:0.0.1-SNAPSHOT
+        ports:
+        - containerPort: 8080
+

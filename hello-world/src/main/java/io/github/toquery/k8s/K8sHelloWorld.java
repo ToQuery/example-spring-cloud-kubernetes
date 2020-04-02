@@ -6,10 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class K8sServerHelloWorld {
-
+public class K8sHelloWorld {
 
     public static void main(String[] args) {
-        SpringApplication.run(K8sServerHelloWorld.class, args);
+        SpringApplication.run(K8sHelloWorld.class, args);
     }
 }

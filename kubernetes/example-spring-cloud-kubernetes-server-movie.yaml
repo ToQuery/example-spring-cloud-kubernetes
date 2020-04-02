@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-spring-cloud-kubernetes-server-movie
+  labels:
+    app: example-spring-cloud-kubernetes-server-movie
+spec:
+  type: NodePort
+  ports:
+    - port: 8082
+  selector:
+    app: example-spring-cloud-kubernetes-server-movie
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-spring-cloud-kubernetes-server-movie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-spring-cloud-kubernetes-server-movie
+  template:
+    metadata:
+      labels:
+        app: example-spring-cloud-kubernetes-server-movie
+    spec:
+      containers:
+      - name: example-spring-cloud-kubernetes-server-movie
+        image: toquery/example-spring-cloud-kubernetes-server-movie:0.0.1-SNAPSHOT
+        ports:
+        - containerPort: 8082
+
