@@ -8,3 +8,4 @@ docker build -t toquery/example-spring-cloud-kubernetes-hello-world:0.0.1-SNAPSH
 docker build -t toquery/example-spring-cloud-kubernetes-server-account:0.0.1-SNAPSHOT servers/account
 docker build -t toquery/example-spring-cloud-kubernetes-server-movie:0.0.1-SNAPSHOT servers/movie
 
+docker rmi $(docker images -f "dangling=true" -q)

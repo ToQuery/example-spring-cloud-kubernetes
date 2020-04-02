@@ -19,6 +19,8 @@
     <modules>
         <module>admin</module>
         <module>zipkin</module>
+        <module>hystrix</module>
+        <module>turbine</module>
     </modules>
 
     <build>

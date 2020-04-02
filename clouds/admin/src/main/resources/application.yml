@@ -1,3 +1,15 @@
 spring:
   application:
     name: example-spring-cloud-kubernetes-cloud-admin
+  boot:
+    admin:
+      context-path: /admin
+      discovery:
+        converter:
+          management-context-path: manage
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
+        #service-labels:
+        #  spring-boot: true

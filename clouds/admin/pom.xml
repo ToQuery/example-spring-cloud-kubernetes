@@ -13,14 +13,20 @@
     <name>Spring Cloud Kubernetes :: Cloud :: Admin</name>
 
     <dependencies>
+
+
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-kubernetes-core</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-kubernetes-discovery</artifactId>
+            <artifactId>spring-cloud-starter-kubernetes</artifactId>
         </dependency>
 
         <dependency>
@@ -28,14 +34,6 @@
             <artifactId>spring-cloud-commons</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

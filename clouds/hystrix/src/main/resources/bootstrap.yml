@@ -9,5 +9,4 @@ management:
 
 spring:
   application:
-    name: example-spring-cloud-kubernetes-cloud-zipkin
-
+    name: example-spring-cloud-kubernetes-cloud-hystrix
