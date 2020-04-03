@@ -1,6 +1,3 @@
-server:
-  port: 8081
-
 management:
   endpoint:
     restart:
@@ -17,4 +14,4 @@ spring:
   cloud:
     kubernetes:
       client:
-        namespace: ${NAMESPACE:default}
+        namespace: ${NAMESPACE:example-spring-cloud-kubernetes}

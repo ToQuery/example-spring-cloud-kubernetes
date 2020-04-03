@@ -21,4 +21,4 @@ spring:
         sources:
           - name: ${spring.application.name}
       client:
-        namespace: ${NAMESPACE:default}
+        namespace: ${NAMESPACE:example-spring-cloud-kubernetes}

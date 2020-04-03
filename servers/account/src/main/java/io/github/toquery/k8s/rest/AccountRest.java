@@ -3,6 +3,7 @@ package io.github.toquery.k8s.rest;
 
 import io.github.toquery.k8s.client.MovieClient;
 import io.github.toquery.k8s.client.MovieDto;
+import io.github.toquery.k8s.client.MovieServiceRibbonClient;
 import io.github.toquery.k8s.entity.AccountEntity;
 import io.github.toquery.k8s.service.AccountService;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +24,9 @@ public class AccountRest {
 
     @Resource
     private MovieClient movieClient;
+
+    @Resource
+    private MovieServiceRibbonClient movieServiceRibbonClient;
 
     @Resource
     private AccountService accountService;
@@ -52,9 +56,14 @@ public class AccountRest {
         accountService.deleteAccount(id);
     }
 
-    @GetMapping("/movies")
-    public List<MovieDto> getMovies() {
+    @GetMapping("/movies/feign")
+    public List<MovieDto> getMoviesByFeign() {
         return movieClient.getMovies();
+    }
+
+    @GetMapping("/movies/ribbon")
+    public List<MovieDto> getMoviesByRibbon() {
+        return movieServiceRibbonClient.getMovies();
     }
 
 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 @FeignClient(name = "example-spring-cloud-kubernetes-server-movie", fallback = MovieClientFallback.class)
 public interface MovieClient {
-
     @GetMapping("/movies")
     List<MovieDto> getMovies();
 }
