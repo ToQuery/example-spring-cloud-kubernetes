@@ -19,9 +19,12 @@ public class MovieServiceRibbonClient {
 		this.restTemplate = restTemplate;
 	}
 
+	/**
+	 * {service-name}.{namespace}.svc.{cluster}.local:{service-port}
+	 */
 	@HystrixCommand(fallbackMethod = "defaultGetMovies")
 	public List<MovieDto> getMovies() {
-		MovieDto[] movies = restTemplate.getForObject("http://example-spring-cloud-kubernetes-server-movie:8080/movies", MovieDto[].class);
+		MovieDto[] movies = restTemplate.getForObject("http://example-spring-cloud-kubernetes-server-movie.example-spring-cloud-kubernetes.svc:8080/movies", MovieDto[].class);
 		return Arrays.asList(movies);
 	}
 

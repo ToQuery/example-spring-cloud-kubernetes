@@ -36,7 +36,7 @@ public class HelloWorldRest {
         map.put("app.message", appConfig.getMessage());
         map.put("spring.application.name", appName);
         Map<String, List<ServiceInstance>> services = this.discoveryClient.getServices().stream()
-                .collect(Collectors.toMap(item -> item, item -> discoveryClient.getInstances(item), (oldValue, newValue) -> {
+                .collect(Collectors.toMap(serviceName -> serviceName, serviceName -> discoveryClient.getInstances(serviceName), (oldValue, newValue) -> {
                     oldValue.addAll(newValue);
                     return oldValue;
                 }));

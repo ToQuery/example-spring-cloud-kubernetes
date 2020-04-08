@@ -18,10 +18,12 @@ public class AccountServiceRibbonClient {
 	public AccountServiceRibbonClient(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
-
+	/**
+	 * {service-name}.{namespace}.svc.{cluster}.local:{service-port}
+	 */
 	@HystrixCommand(fallbackMethod = "defaultGetAccounts")
 	public List<AccountDto> getAccounts() {
-		AccountDto[] accounts = restTemplate.getForObject("http://example-spring-cloud-kubernetes-server-account:8080/accounts", AccountDto[].class);
+		AccountDto[] accounts = restTemplate.getForObject("http://example-spring-cloud-kubernetes-server-account.example-spring-cloud-kubernetes.svc:8080/accounts", AccountDto[].class);
 		return Arrays.asList(accounts);
 	}
 

@@ -11,7 +11,3 @@ spring:
   application:
     name: example-spring-cloud-kubernetes-server-movie
 
-  cloud:
-    kubernetes:
-      client:
-        namespace: ${NAMESPACE:example-spring-cloud-kubernetes}

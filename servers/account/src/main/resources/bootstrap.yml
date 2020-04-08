@@ -11,7 +11,4 @@ spring:
   application:
     name: example-spring-cloud-kubernetes-server-account
 
-  cloud:
-    kubernetes:
-      client:
-        namespace: ${NAMESPACE:example-spring-cloud-kubernetes}
+
