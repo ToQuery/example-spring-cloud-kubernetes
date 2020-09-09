@@ -1,6 +1,16 @@
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+
+server:
+  port: 8090
+
 spring:
-  application:
-    name: example-spring-cloud-kubernetes-cloud-admin
   boot:
     admin:
       context-path: /admin

@@ -8,7 +8,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8080
+    - port: 8011
   selector:
     app: example-spring-cloud-kubernetes-server-movie
 ---
@@ -31,5 +31,23 @@ spec:
       - name: example-spring-cloud-kubernetes-server-movie
         image: toquery/example-spring-cloud-kubernetes-server-movie:0.0.1-SNAPSHOT
         ports:
-        - containerPort: 8080
-
+        - containerPort: 8011
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: k8s
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8011
+          initialDelaySeconds: 15
+          timeoutSeconds: 3
+          periodSeconds: 10
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8011
+          initialDelaySeconds: 180
+          timeoutSeconds: 3
+          periodSeconds: 10
+          failureThreshold: 3

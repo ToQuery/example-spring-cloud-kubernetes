@@ -19,7 +19,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/accounts")
 public class AccountRest {
 
     @Resource

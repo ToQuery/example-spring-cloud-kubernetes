@@ -57,12 +57,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-kubernetes-all</artifactId>
         </dependency>
-        <!-- new version miss 1.1.2.RELEASE
+        <!-- new version miss 1.1.2.RELEASE -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-kubernetes-ribbon</artifactId>
         </dependency>
-        -->
 
 
 

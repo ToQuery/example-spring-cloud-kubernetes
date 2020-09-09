@@ -18,7 +18,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/movies")
 public class MovieRest {
 
     @Resource

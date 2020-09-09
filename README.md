@@ -6,7 +6,8 @@
 cd hello-world
 mvn clean package fabric8:deploy
 ```
-等待服务部署完毕后，查看服务的部署情况
+
+等待服务部署完毕后（或通过命令行 `kubectl get pods -w`），查看服务的部署情况
 
 ```shell script
 kubectl get services example-spring-cloud-kubernetes-hello-world
@@ -46,5 +47,9 @@ kubectl get services example-spring-cloud-kubernetes-hello-world-load-balancer
 NAME                                                        TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                                        AGE
 example-spring-cloud-kubernetes-hello-world-load-balancer   LoadBalancer   10.101.144.30   localhost     8080:30683/TCP,9779:31802/TCP,8778:30643/TCP   34s
 ```
+
+## Spring Cloud 全栈服务
+
+doc/spring-cloud-kubernetes.md
 
 

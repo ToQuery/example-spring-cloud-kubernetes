@@ -1,4 +1,16 @@
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+
+server:
+  port: 8010
+
 spring:
   profiles:
-    active: ${SPRING-ACTIVE-PROFILES:}
+    active: local
 

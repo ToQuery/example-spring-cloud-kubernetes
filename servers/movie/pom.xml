@@ -58,12 +58,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-kubernetes-all</artifactId>
         </dependency>
-        <!-- new version miss 1.1.2.RELEASE
+        <!-- new version miss 1.1.2.RELEASE -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-kubernetes-ribbon</artifactId>
         </dependency>
-        -->
+
 
 
 
@@ -102,6 +102,10 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

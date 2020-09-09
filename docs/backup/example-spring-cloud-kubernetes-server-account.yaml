@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-spring-cloud-kubernetes-server-account
+  namespace: example-spring-cloud-kubernetes
+  labels:
+    app: example-spring-cloud-kubernetes-server-account
+spec:
+  type: NodePort
+  ports:
+    - port: 8010
+  selector:
+    app: example-spring-cloud-kubernetes-server-account
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-spring-cloud-kubernetes-server-account
+  namespace: example-spring-cloud-kubernetes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-spring-cloud-kubernetes-server-account
+  template:
+    metadata:
+      labels:
+        app: example-spring-cloud-kubernetes-server-account
+    spec:
+      containers:
+      - name: example-spring-cloud-kubernetes-server-account
+        image: toquery/example-spring-cloud-kubernetes-server-account:0.0.1-SNAPSHOT
+        ports:
+        - containerPort: 8010
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: k8s
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8010
+          initialDelaySeconds: 15
+          timeoutSeconds: 3
+          periodSeconds: 10
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8010
+          initialDelaySeconds: 180
+          timeoutSeconds: 3
+          periodSeconds: 10
+          failureThreshold: 3
+
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: example-spring-cloud-kubernetes-server-account
+  namespace: example-spring-cloud-kubernetes
+spec:
+  selector:
+    matchLabels:
+      app: example-spring-cloud-kubernetes-server-account
+  template:
+    metadata:
+      labels:
+        app: example-spring-cloud-kubernetes-server-account
+    spec:
+      # 选择对应标签的node
+#      nodeSelector:
+#        isIngress: "true"
+      # 使用hostNetwork暴露服务
+      hostNetwork: true
+      containers:
+        - name: example-spring-cloud-kubernetes-server-account
+          image: toquery/example-spring-cloud-kubernetes-server-account:0.0.1-SNAPSHOT
+          ports:
+            - containerPort: 8010
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8010
+            initialDelaySeconds: 15
+            timeoutSeconds: 3
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8010
+            initialDelaySeconds: 180
+            timeoutSeconds: 3
+            periodSeconds: 10
+            failureThreshold: 3
