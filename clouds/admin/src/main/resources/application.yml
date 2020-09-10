@@ -11,9 +11,14 @@ server:
   port: 8090
 
 spring:
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: admin
   boot:
     admin:
-      context-path: /admin
+      context-path: /
       discovery:
         converter:
           management-context-path: manage
