@@ -1,5 +1,7 @@
 # spring-cloud-kubernetes
 
+> 本项目仅讨论 kubernetes 的落地实现，关于各项组件含义配置使用见 [ToQuery/example-kubernetes](https://github.com/ToQuery/example-kubernetes)
+
 ## 快速使用 Hello World 服务
 
 ```shell script
@@ -50,6 +52,6 @@ example-spring-cloud-kubernetes-hello-world-load-balancer   LoadBalancer   10.10
 
 ## Spring Cloud 全栈服务
 
-doc/spring-cloud-kubernetes.md
+基于 Spring Cloud 的 kubernetes 实现 [spring-cloud-kubernetes.md](doc/spring-cloud-kubernetes.md)
 
 
