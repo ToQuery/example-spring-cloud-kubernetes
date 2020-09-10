@@ -4,7 +4,7 @@
 
 ```shell script
 cd hello-world
-mvn clean package fabric8:deploy
+mvn clean package -Pkubernetes fabric8:deploy
 ```
 
 等待服务部署完毕后（或通过命令行 `kubectl get pods -w`），查看服务的部署情况

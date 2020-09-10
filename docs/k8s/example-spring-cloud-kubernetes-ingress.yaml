@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: example-spring-cloud-kubernetes.toquery.io
+    - host: example-spring-cloud-kubernetes.localhost
       http:
         paths:
           - path: /account

@@ -1,2 +1,15 @@
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: restart
+
 app:
-  message: this is a message from config file
+  message: this is a message from yml file

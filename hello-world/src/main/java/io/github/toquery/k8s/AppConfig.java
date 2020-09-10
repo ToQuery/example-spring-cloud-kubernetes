@@ -24,8 +24,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Setter
 @Getter
-@RefreshScope
-@Configuration
 @ConfigurationProperties(prefix = "app")
 public class AppConfig {
 

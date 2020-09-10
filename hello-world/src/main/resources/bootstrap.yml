@@ -1,24 +1,16 @@
-management:
-  endpoint:
-    restart:
-      enabled: true
-    health:
-      enabled: true
-    info:
-      enabled: true
 
 spring:
   application:
     name: example-spring-cloud-kubernetes-hello-world
-
   cloud:
     kubernetes:
       reload:
         enabled: true
-        mode: polling
+        mode: event
         period: 5000
+        strategy: restart_context
       config:
         sources:
           - name: ${spring.application.name}
       client:
-        namespace: ${NAMESPACE:example-spring-cloud-kubernetes}
+        namespace: example-spring-cloud-kubernetes

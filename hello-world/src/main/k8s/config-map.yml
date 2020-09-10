@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: example-spring-cloud-kubernetes-hello-world
-data:
-  application.yml: |-
-    app.message=this is a message from k8s config map

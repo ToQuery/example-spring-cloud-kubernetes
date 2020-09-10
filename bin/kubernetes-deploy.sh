@@ -2,9 +2,10 @@
 
 set -e
 
-cd ../
-kubectl create -f kubernetes/example-spring-cloud-kubernetes-namespace.yaml
+# use namespace
+# kubectl config set-context --current --namespace example-spring-cloud-kubernetes
 
-kubectl create -f kubernetes/example-spring-cloud-kubernetes-hello-world.yaml
-kubectl create -f kubernetes/example-spring-cloud-kubernetes-server-account.yaml
-kubectl create -f kubernetes/example-spring-cloud-kubernetes-server-movie.yaml
+kubectl create -f ../docs/k8s/example-spring-cloud-kubernetes-namespace.yaml
+kubectl create -f ../docs/k8s/example-spring-cloud-kubernetes-server-account.yaml
+kubectl create -f ../docs/k8s/example-spring-cloud-kubernetes-server-movie.yaml
+kubectl create -f ../docs/k8s/example-spring-cloud-kubernetes-ingress.yaml
