@@ -7,7 +7,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class MovieEntity {
 
@@ -17,5 +16,9 @@ public class MovieEntity {
 
     private String summary;
 
-
+    public MovieEntity(int id, String name, String summary) {
+        this.id = id;
+        this.name = name;
+        this.summary = summary;
+    }
 }

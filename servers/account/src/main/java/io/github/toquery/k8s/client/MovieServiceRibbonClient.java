@@ -1,6 +1,6 @@
 package io.github.toquery.k8s.client;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -22,7 +22,7 @@ public class MovieServiceRibbonClient {
 	/**
 	 * {service-name}.{namespace}.svc.{cluster}.local:{service-port}
 	 */
-	@HystrixCommand(fallbackMethod = "defaultGetMovies")
+	@Retry(name = "getMovies", fallbackMethod = "defaultGetMovies")
 	public List<MovieDto> getMovies() {
 		MovieDto[] movies = restTemplate.getForObject("http://example-spring-cloud-kubernetes-server-movie.example-spring-cloud-kubernetes.svc:8080/movies", MovieDto[].class);
 		return Arrays.asList(movies);

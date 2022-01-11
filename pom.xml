@@ -63,7 +63,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
+    <!--
     <build>
         <pluginManagement>
             <plugins>
@@ -73,22 +73,22 @@
                     <version>1.4.13</version>
                     <configuration>
                         <useMavenSettingsForAuth>false</useMavenSettingsForAuth>
-                        <!--<serverId>docker-hub</serverId>-->
-                        <!--docker 镜像名称：仓库地址/景象名称:版本号-->
+                        &lt;!&ndash;<serverId>docker-hub</serverId>&ndash;&gt;
+                        &lt;!&ndash;docker 镜像名称：仓库地址/景象名称:版本号&ndash;&gt;
                         <repository>${docker.image.prefix}/${docker.image.name}</repository>
 
                         <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
-                        <!-- -->
+                        &lt;!&ndash; &ndash;&gt;
                         <contextDirectory>${project.build.directory}</contextDirectory>
-                        <!--<dockerInfoDirectory>${project.basedir}/src/main/docker</dockerInfoDirectory>-->
-                        <!--镜像版本号-->
+                        &lt;!&ndash;<dockerInfoDirectory>${project.basedir}/src/main/docker</dockerInfoDirectory>&ndash;&gt;
+                        &lt;!&ndash;镜像版本号&ndash;&gt;
                         <tag>${docker.image.tag}</tag>
                         <buildArgs>
-                            <!--与dockerfile文件内容相呼应-->
-                            <!--
+                            &lt;!&ndash;与dockerfile文件内容相呼应&ndash;&gt;
+                            &lt;!&ndash;
                             <JAVA_BASE>${docker.base.java}</JAVA_BASE>
                             <JAR_BASE>${docker.base.jar}</JAR_BASE>
-                            -->
+                            &ndash;&gt;
                             <JAR_FILE>${docker.image.jar}</JAR_FILE>
                         </buildArgs>
                     </configuration>
@@ -225,4 +225,5 @@
             </build>
         </profile>
     </profiles>
+    -->
 </project>

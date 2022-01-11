@@ -1,6 +1,6 @@
 package io.github.toquery.k8s.client;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +21,7 @@ public class AccountServiceRibbonClient {
 	/**
 	 * {service-name}.{namespace}.svc.{cluster}.local:{service-port}
 	 */
-	@HystrixCommand(fallbackMethod = "defaultGetAccounts")
+	@Retry(name = "getAccounts", fallbackMethod = "defaultGetAccounts")
 	public List<AccountDto> getAccounts() {
 		AccountDto[] accounts = restTemplate.getForObject("http://example-spring-cloud-kubernetes-server-account.example-spring-cloud-kubernetes.svc:8080/accounts", AccountDto[].class);
 		return Arrays.asList(accounts);
