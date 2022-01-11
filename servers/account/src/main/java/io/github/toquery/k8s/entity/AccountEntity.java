@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class AccountEntity {
 
@@ -16,9 +17,5 @@ public class AccountEntity {
 
     private String phone;
 
-    public AccountEntity(int id, String name, String phone) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-    }
+
 }
