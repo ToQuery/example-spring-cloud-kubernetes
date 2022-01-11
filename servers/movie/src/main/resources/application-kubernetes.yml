@@ -3,7 +3,5 @@ spring:
     kubernetes:
       client:
         namespace: example-spring-cloud-kubernetes
-      ribbon:
-        mode: service
       discovery:
         all-namespaces: true

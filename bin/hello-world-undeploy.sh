@@ -2,4 +2,4 @@
 
 set -e
 
-kubectl delete -f docs/k8s/example-spring-cloud-kubernetes-hello-world.yaml
+kubectl delete -f docs/kubernetes/example-spring-cloud-kubernetes-hello-world.yaml
