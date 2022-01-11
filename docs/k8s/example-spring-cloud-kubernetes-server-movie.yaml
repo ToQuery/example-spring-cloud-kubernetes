@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: example-spring-cloud-kubernetes-server-movie
-        image: toquery/example-spring-cloud-kubernetes-server-movie:0.0.1-SNAPSHOT
+        image: toquery/example-spring-cloud-kubernetes-server-movie:0.0.1
         ports:
         - containerPort: 8011
         env:

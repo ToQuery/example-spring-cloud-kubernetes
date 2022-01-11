@@ -33,7 +33,7 @@ spec:
       hostNetwork: true
       containers:
         - name: example-spring-cloud-kubernetes-server-account
-          image: toquery/example-spring-cloud-kubernetes-server-account:0.0.1-SNAPSHOT
+          image: toquery/example-spring-cloud-kubernetes-server-account:0.0.1
           ports:
             - containerPort: 8010
           env:

@@ -1,4 +1,0 @@
-
-spring:
-  application:
-    name: example-spring-cloud-kubernetes-cloud-hystrix

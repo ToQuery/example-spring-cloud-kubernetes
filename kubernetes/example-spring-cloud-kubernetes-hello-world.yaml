@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: example-spring-cloud-kubernetes-hello-world
-        image: toquery/example-spring-cloud-kubernetes-hello-world:0.0.1-SNAPSHOT
+        image: toquery/example-spring-cloud-kubernetes-hello-world:0.0.1
         ports:
         - containerPort: 8080
 

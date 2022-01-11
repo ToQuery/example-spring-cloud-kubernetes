@@ -40,7 +40,7 @@ public class HelloWorldRest {
                     oldValue.addAll(newValue);
                     return oldValue;
                 }));
-        map.put("services", services);
+//        map.put("services", services);
         return map;
     }
 
@@ -57,7 +57,7 @@ public class HelloWorldRest {
 
 
     @GetMapping("/services/{name}")
-    public ResponseEntity service(@PathVariable("name") String name) {
+    public ResponseEntity<?> service(@PathVariable("name") String name) {
         List<ServiceInstance> instances = discoveryClient.getInstances(name);
         return ResponseEntity.ok(instances);
     }

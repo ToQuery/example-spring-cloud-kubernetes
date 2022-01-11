@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: example-spring-cloud-kubernetes
@@ -13,10 +13,16 @@ spec:
       http:
         paths:
           - path: /account
+            pathType: Prefix
             backend:
-              serviceName: example-spring-cloud-kubernetes-server-account
-              servicePort: 8010
+              service:
+                name: example-spring-cloud-kubernetes-server-account
+                port:
+                  number: 8010
           - path: /movie
+            pathType: Prefix
             backend:
-              serviceName: example-spring-cloud-kubernetes-server-movie
-              servicePort: 8011
+              service:
+                name: example-spring-cloud-kubernetes-server-movie
+                port:
+                  number: 8011

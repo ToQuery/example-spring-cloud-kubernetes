@@ -14,3 +14,4 @@ spring:
           - name: ${spring.application.name}
       client:
         namespace: example-spring-cloud-kubernetes
+      enabled: true
