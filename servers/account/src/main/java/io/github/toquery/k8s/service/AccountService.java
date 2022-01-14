@@ -16,7 +16,7 @@ public class AccountService {
 
     private static Map<Integer, AccountEntity> accounts = new HashMap<>();
 
-    public AccountServiceImpl() {
+    public AccountService() {
         accounts.put(1, new AccountEntity(1, "李逍遥", "18300010001"));
         accounts.put(2, new AccountEntity(2, "赵灵儿", "18300010002"));
         accounts.put(3, new AccountEntity(3, "李月如", "18300010003"));
