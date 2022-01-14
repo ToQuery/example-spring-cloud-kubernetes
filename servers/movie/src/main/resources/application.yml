@@ -4,11 +4,21 @@ management:
       enabled: true
     health:
       enabled: true
+      probes:
+        enabled: true
     info:
       enabled: true
-
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
 server:
-  port: 8011
+  port: 8012
 
 spring:
   profiles:

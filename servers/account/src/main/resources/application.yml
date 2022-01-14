@@ -6,9 +6,17 @@ management:
       enabled: true
     info:
       enabled: true
-
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
 server:
-  port: 8010
+  port: 8011
 
 spring:
   profiles:

@@ -1,0 +1,53 @@
+version: '2'
+
+services:
+  # 监控服务
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ../etc/prometheus/:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - '9090:9090'
+  grafana:
+    image: grafana/grafana
+    ports:
+      - '3000:3000'
+    volumes:
+      - ../etc/grafana/provisioning/:/etc/grafana/provisioning/
+
+  # 日志收集
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:7.6.2
+    volumes:
+      - ../etc/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ~/data/elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  logstash_test:
+    image: logstash:7.6.2
+    container_name: logstash
+    volumes:
+      - ../etc/logstash/config:/usr/share/logstash/config/:ro
+      - ../etc/logstash/pipeline/:/usr/share/logstash/pipeline/
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+  kibana:
+    container_name: kibana
+    image: kibana:7.6.2
+    volumes:
+      - ../etc/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - "5601:5601"
+
+  # 数据库
+
+  # 后端服务
+
+  # 前端服务
+
+  # Spring Cloud 服务

@@ -4,6 +4,13 @@
 
 ## 快速使用 Hello World 服务
 
+- 文件部署
+
+```shell script
+kubectl apply -f hello-world/kubernetes/example-spring-cloud-kubernetes-hello-world.yaml
+```
+
+- 源码部署（maven插件）
 ```shell script
 cd hello-world
 mvn clean package -Pkubernetes fabric8:deploy
@@ -52,6 +59,8 @@ example-spring-cloud-kubernetes-hello-world-load-balancer   LoadBalancer   10.10
 
 ## Spring Cloud 全栈服务
 
-基于 Spring Cloud 的 kubernetes 实现 [spring-cloud-kubernetes.md](doc/spring-cloud-kubernetes.md)
+- 基于 Docker Compose 实现 [spring-cloud-kubernetes.md](doc/spring-cloud-docker-compose.md)
+
+- 基于 Spring Cloud kubernetes 实现 [spring-cloud-kubernetes.md](doc/spring-cloud-kubernetes.md)
 
 

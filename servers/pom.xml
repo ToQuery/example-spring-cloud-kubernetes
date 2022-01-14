@@ -16,6 +16,7 @@
     <modules>
         <module>account</module>
         <module>movie</module>
+        <module>ui</module>
     </modules>
 
 </project>

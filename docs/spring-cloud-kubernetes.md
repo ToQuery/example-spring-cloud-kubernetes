@@ -1,15 +1,23 @@
 
-## 服务端口分布
+## 服务
 
-| 端口 | 服务    |
-| ---- | ------- |
-| 8010 | account |
-| 8011 | movie   |
-|      |         |
-| 8090 | admin   |
-| 8091 | hystrix |
-| 8092 | turbine |
-| 8093 | zipkin  |
+[] mongodb
+[] kong
+[] konga
+[] prometheus
+[] grafana
+[] elk
+
+## 项目模块服务
+
+| 端口   | 服务      |     |
+|------|---------|-----|
+| 8010 | ui      |     |
+| 8011 | account |     |
+| 8012 | movie   |     |
+|      |         |     |
+| 8090 | admin   |     |
+| 8093 | zipkin  |     |
 
 
 ## 部署服务

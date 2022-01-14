@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @EnableFeignClients
-@EnableCircuitBreaker
 @SpringBootApplication
 @EnableDiscoveryClient
 public class K8sServerAccount {

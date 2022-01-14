@@ -28,8 +28,8 @@
     </modules>
 
     <properties>
-        <java.version>8</java.version>
-        <spring-boot-admin.version>2.3.0</spring-boot-admin.version>
+        <java.version>17</java.version>
+        <spring-boot-admin.version>2.6.0</spring-boot-admin.version>
         <spring-cloud.version>2021.0.0</spring-cloud.version>
 
         <!--docker 容器相关-->

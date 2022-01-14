@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: konga
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: konga
+        app: konga
+    spec:
+      containers:
+        - name: konga
+          image: pantsel/konga
+          env:
+            - name: DB_ADAPTER
+              value: postgres
+            - name: DB_HOST
+              value: mydbendpoint
+              #valueFrom:
+              #  secretKeyRef:
+              #    name: kongcreds
+              #    key: postgresdbname
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: kongcreds
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kongcreds
+                  key: password
+            - name: DB_DATABASE
+              value: postgres
+            - name: TOKEN_SECRET
+              value: somesecretstring
+          ports:
+            - containerPort: 1337
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: konga
+  name: konga-svc
+  namespace: alt
+spec:
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 1337
+  selector:
+    app: konga
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  name: konga
+spec:
+  rules:
+    - host: konga.mydomain.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: konga-svc
+                port:
+                  number: 443
+
+  tls:
+    - hosts:
+        - konga.mydomain.com
+      secretName: konga-mydomain-tls
+#kubetpl render konga.yml -i kong-env.yml --syntax go-template  | kubectl apply -f -

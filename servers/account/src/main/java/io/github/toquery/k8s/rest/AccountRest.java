@@ -1,9 +1,9 @@
 package io.github.toquery.k8s.rest;
 
 
-import io.github.toquery.k8s.client.MovieClient;
-import io.github.toquery.k8s.client.MovieDto;
-import io.github.toquery.k8s.client.MovieServiceRibbonClient;
+import io.github.toquery.k8s.feign.MovieFeignClient;
+import io.github.toquery.k8s.dto.MovieDto;
+import io.github.toquery.k8s.resilience4j.MovieServiceResilience4jClient;
 import io.github.toquery.k8s.entity.AccountEntity;
 import io.github.toquery.k8s.service.AccountService;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -22,10 +21,10 @@ import java.util.List;
 public class AccountRest {
 
     @Resource
-    private MovieClient movieClient;
+    private MovieFeignClient movieFeignClient;
 
     @Resource
-    private MovieServiceRibbonClient movieServiceRibbonClient;
+    private MovieServiceResilience4jClient movieServiceResilience4jClient;
 
     @Resource
     private AccountService accountService;
@@ -57,12 +56,12 @@ public class AccountRest {
 
     @GetMapping("/movies/feign")
     public List<MovieDto> getMoviesByFeign() {
-        return movieClient.getMovies();
+        return movieFeignClient.getMovies();
     }
 
-    @GetMapping("/movies/ribbon")
+    @GetMapping("/movies/resilience4j")
     public List<MovieDto> getMoviesByRibbon() {
-        return movieServiceRibbonClient.getMovies();
+        return movieServiceResilience4jClient.getMovies();
     }
 
 }

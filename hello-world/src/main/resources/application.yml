@@ -4,12 +4,22 @@ management:
       enabled: true
     health:
       enabled: true
+      probes:
+        enabled: true
     info:
       enabled: true
   endpoints:
     web:
       exposure:
-        include: restart
+        include: "*"
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+
+server:
+  shutdown: graceful
 
 app:
   message: this is a message from yml file

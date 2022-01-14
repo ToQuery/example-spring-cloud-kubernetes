@@ -1,27 +1,44 @@
 package io.github.toquery.k8s.service;
 
-import io.github.toquery.k8s.client.AccountClient;
-import io.github.toquery.k8s.client.AccountDto;
 import io.github.toquery.k8s.entity.MovieEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public interface MovieService {
+@Service
+public class MovieService {
 
-    List<MovieEntity> getMovies();
+    private static Map<Integer, MovieEntity> movies = new HashMap<>();
 
-    MovieEntity createMovie(MovieEntity movieEntity);
+    public MovieService() {
+        movies.put(1, new MovieEntity(1, "海上钢琴师", "海上钢琴师"));
+        movies.put(2, new MovieEntity(2, "那些年", "那些年"));
+        movies.put(3, new MovieEntity(3, "大话西游", "大话西游"));
+        movies.put(4, new MovieEntity(4, "黑客帝国", "黑客帝国"));
+        movies.put(5, new MovieEntity(5, "回到未来", "回到未来"));
+    }
 
-    MovieEntity getMovie(int id);
+    public List<MovieEntity> getMovies() {
+        return new ArrayList<>(movies.values());
+    }
 
-    MovieEntity updateMovie(MovieEntity movieEntity);
+    public MovieEntity createMovie(MovieEntity movieEntity) {
+        movies.put(movieEntity.getId(), movieEntity);
+        return movieEntity;
+    }
 
-    void deleteMovie(int id);
+    public MovieEntity getMovie(int id) {
+        return movies.get(id);
+    }
+
+    public MovieEntity updateMovie(MovieEntity movieEntity) {
+        return movies.put(movieEntity.getId(), movieEntity);
+    }
+
+    public void deleteMovie(int id) {
+        movies.remove(id);
+    }
 }

@@ -1,0 +1,23 @@
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+server:
+  port: 8010
+
+spring:
+  profiles:
+    active: local
