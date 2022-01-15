@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: example-spring-cloud-kubernetes-hello-world
+  name: example-spring-cloud-kubernetes-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: example-spring-cloud-kubernetes-hello-world.localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: example-spring-cloud-kubernetes-hello-world
+                port:
+                  number: 8080

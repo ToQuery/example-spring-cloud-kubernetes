@@ -13,5 +13,5 @@ spring:
         sources:
           - name: ${spring.application.name}
       client:
-        namespace: example-spring-cloud-kubernetes
+        namespace: example-spring-cloud-kubernetes-hello-world
       enabled: true

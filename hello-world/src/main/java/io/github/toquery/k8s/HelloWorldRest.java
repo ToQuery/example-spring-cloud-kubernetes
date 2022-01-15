@@ -48,12 +48,12 @@ public class HelloWorldRest {
         String hostName = InetAddress.getLocalHost().getHostName();
         map.put("hostName", hostName);
 
-        Map<String, List<ServiceInstance>> services = this.discoveryClient.getServices().stream()
-                .collect(Collectors.toMap(serviceName -> serviceName, serviceName -> discoveryClient.getInstances(serviceName), (oldValue, newValue) -> {
-                    oldValue.addAll(newValue);
-                    return oldValue;
-                }));
-        map.put("services", services);
+//        Map<String, List<ServiceInstance>> services = this.discoveryClient.getServices().stream()
+//                .collect(Collectors.toMap(serviceName -> serviceName, serviceName -> discoveryClient.getInstances(serviceName), (oldValue, newValue) -> {
+//                    oldValue.addAll(newValue);
+//                    return oldValue;
+//                }));
+//        map.put("services", services);
         return map;
     }
 

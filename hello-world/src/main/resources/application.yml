@@ -23,3 +23,9 @@ server:
 
 app:
   message: this is a message from yml file
+
+#spring:
+#  cloud:
+#    kubernetes:
+#      client:
+#        masterUrl: https://localhost:6443

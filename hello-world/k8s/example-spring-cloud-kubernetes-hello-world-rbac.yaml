@@ -1,0 +1,41 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: example-spring-cloud-kubernetes-hello-world # 鉴于 ClusterRole 是集群范围对象，所以这里不需要定义 "namespace" 字段
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - endpoints
+      - pods
+      - services
+      - configmaps
+    verbs:
+      - get
+      - list
+      - watch
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: example-spring-cloud-kubernetes-hello-world #ClusterRoleBinding的名字
+#  namespace: example-spring-cloud-kubernetes-hello-world
+subjects:
+  - kind: ServiceAccount
+    name: default #example-spring-cloud-kubernetes-hello-world #serviceaccount资源对象的name
+    namespace: example-spring-cloud-kubernetes-hello-world #serviceaccount的namespace
+roleRef:
+  kind: ClusterRole
+  name: example-spring-cloud-kubernetes-hello-world #cluster-admin #k8s集群中最高权限的角色
+  apiGroup: rbac.authorization.k8s.io
+
+#---
+#apiVersion: v1
+#kind: ServiceAccount
+#metadata:
+#  name: example-spring-cloud-kubernetes-hello-world # ServiceAccount的名字
+#  namespace: example-spring-cloud-kubernetes-hello-world
+#  labels:
+#    app: example-spring-cloud-kubernetes-hello-world #ServiceAccount的标签
