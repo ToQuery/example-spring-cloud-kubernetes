@@ -16,11 +16,7 @@ kubectl apply -f https://raw.githubusercontent.com/ToQuery/example-spring-cloud-
 
 ```shell script
 kubectl get services example-spring-cloud-kubernetes-hello-world
-```
 
-会得到如下信息：
-
-```text
 NAME                                          TYPE       CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
 example-spring-cloud-kubernetes-hello-world   NodePort   10.102.61.4   <none>        8080:31730/TCP   51m
 ```
