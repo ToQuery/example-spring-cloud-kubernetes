@@ -4,8 +4,6 @@ management:
       enabled: true
     health:
       enabled: true
-      probes:
-        enabled: true
     info:
       enabled: true
   endpoints:
@@ -17,9 +15,17 @@ management:
       enabled: true
     readinessState:
       enabled: true
+
 server:
-  port: 8012
+  shutdown: graceful
 
 spring:
-  profiles:
-    active: local
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+        mode: event
+        period: 5000
+        strategy: restart_context
+      client:
+        namespace: example-spring-cloud-kubernetes

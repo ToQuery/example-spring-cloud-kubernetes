@@ -7,8 +7,7 @@ docker build -t toquery/example-spring-cloud-kubernetes-hello-world:0.0.1 hello-
 
 docker build -t toquery/example-spring-cloud-kubernetes-cloud-zipkin:0.0.1 clouds/zipkin
 docker build -t toquery/example-spring-cloud-kubernetes-cloud-admin:0.0.1 clouds/admin
-docker build -t toquery/example-spring-cloud-kubernetes-cloud-hystrix:0.0.1 clouds/hystrix
-docker build -t toquery/example-spring-cloud-kubernetes-cloud-turbine:0.0.1 clouds/turbine
+docker build -t toquery/example-spring-cloud-kubernetes-cloud-gateway:0.0.1 clouds/gateway
 
 docker build -t toquery/example-spring-cloud-kubernetes-server-account:0.0.1 servers/account
 docker build -t toquery/example-spring-cloud-kubernetes-server-movie:0.0.1 servers/movie

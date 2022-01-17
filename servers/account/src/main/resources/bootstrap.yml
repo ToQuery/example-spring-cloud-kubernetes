@@ -2,5 +2,10 @@
 spring:
   application:
     name: example-spring-cloud-kubernetes-server-account
+  cloud:
+    kubernetes:
+      config:
+        sources:
+          - name: ${spring.application.name}
 
 

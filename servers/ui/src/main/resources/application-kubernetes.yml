@@ -1,7 +1,1 @@
-spring:
-  cloud:
-    kubernetes:
-      client:
-        namespace: example-spring-cloud-kubernetes
-      discovery:
-        all-namespaces: true
+

@@ -8,16 +8,17 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8010
+    - port: 8080
   selector:
     app: example-spring-cloud-kubernetes-server-account
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: ReplicaSet
 metadata:
   name: example-spring-cloud-kubernetes-server-account
   namespace: example-spring-cloud-kubernetes
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: example-spring-cloud-kubernetes-server-account
@@ -26,31 +27,24 @@ spec:
       labels:
         app: example-spring-cloud-kubernetes-server-account
     spec:
-      # 选择对应标签的node
-#      nodeSelector:
-#        isIngress: "true"
-      # 使用hostNetwork暴露服务
-      hostNetwork: true
+      hostNetwork: true # 使用hostNetwork暴露服务
       containers:
         - name: example-spring-cloud-kubernetes-server-account
           image: toquery/example-spring-cloud-kubernetes-server-account:0.0.1
           ports:
-            - containerPort: 8010
-          env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: k8s
+            - containerPort: 8080
           readinessProbe:
             httpGet:
-              path: /actuator/health
-              port: 8010
+              path: /actuator/health/readiness
+              port: 8080
             initialDelaySeconds: 15
             timeoutSeconds: 3
             periodSeconds: 10
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: /actuator/health
-              port: 8010
+              path: /actuator/health/liveness
+              port: 8080
             initialDelaySeconds: 180
             timeoutSeconds: 3
             periodSeconds: 10

@@ -1,23 +1,23 @@
 
 ## 服务
 
-[] mongodb
-[] kong
-[] konga
-[] prometheus
-[] grafana
-[] elk
+- [] mongodb
+- [] kong
+- [] konga
+- [] prometheus
+- [] grafana
+- [] elk
 
-## 项目模块服务
+## 服务器地址路径与内部服务、端口
 
-| 端口   | 服务      |     |
-|------|---------|-----|
-| 8010 | ui      |     |
-| 8011 | account |     |
-| 8012 | movie   |     |
-|      |         |     |
-| 8090 | admin   |     |
-| 8093 | zipkin  |     |
+| 服务名称 | 域名路径                     | 端口 | 服务    |      |
+| -------- |--------------------------| ---- | ------- | ---- |
+| kong网关 | http://kong.local        | 8010 | ui      |      |
+| Konga    | http://konga.local | 8011 | account |      |
+| Grafana | http://grafana.local | 8012 | movie   |      |
+| kibana | http://kibana.local |      |         |      |
+|          |                          | 8090 | admin   |      |
+|          |                          | 8093 | zipkin  |      |
 
 
 ## 部署服务

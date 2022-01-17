@@ -22,9 +22,4 @@ spring:
       discovery:
         converter:
           management-context-path: manage
-  cloud:
-    kubernetes:
-      discovery:
-        all-namespaces: true
-        #service-labels:
-        #  spring-boot: true
+

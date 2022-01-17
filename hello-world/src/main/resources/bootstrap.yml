@@ -4,14 +4,8 @@ spring:
     name: example-spring-cloud-kubernetes-hello-world
   cloud:
     kubernetes:
-      reload:
-        enabled: true
-        mode: event
-        period: 5000
-        strategy: restart_context
+
       config:
         sources:
           - name: ${spring.application.name}
-      client:
-        namespace: example-spring-cloud-kubernetes-hello-world
-      enabled: true
+

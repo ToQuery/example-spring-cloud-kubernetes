@@ -1,0 +1,9 @@
+app:
+  message: this is a message from application-dev.yml file
+
+spring:
+  cloud:
+    kubernetes:
+#      client:
+#        masterUrl: https://kubernetes.docker.internal
+      enabled: false

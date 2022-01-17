@@ -8,12 +8,12 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8011
+    - port: 8080
   selector:
     app: example-spring-cloud-kubernetes-server-movie
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
   name: example-spring-cloud-kubernetes-server-movie
   namespace: example-spring-cloud-kubernetes
@@ -27,27 +27,28 @@ spec:
       labels:
         app: example-spring-cloud-kubernetes-server-movie
     spec:
+      hostNetwork: true # 使用hostNetwork暴露服务
       containers:
-      - name: example-spring-cloud-kubernetes-server-movie
-        image: toquery/example-spring-cloud-kubernetes-server-movie:0.0.1
-        ports:
-        - containerPort: 8011
-        env:
-          - name: SPRING_PROFILES_ACTIVE
-            value: k8s
-        readinessProbe:
-          httpGet:
-            path: /actuator/health
-            port: 8011
-          initialDelaySeconds: 15
-          timeoutSeconds: 3
-          periodSeconds: 10
-          failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            path: /actuator/health
-            port: 8011
-          initialDelaySeconds: 180
-          timeoutSeconds: 3
-          periodSeconds: 10
-          failureThreshold: 3
+        - name: example-spring-cloud-kubernetes-server-movie
+          image: toquery/example-spring-cloud-kubernetes-server-movie:0.0.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 15
+            timeoutSeconds: 3
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 180
+            timeoutSeconds: 3
+            periodSeconds: 10
+            failureThreshold: 3

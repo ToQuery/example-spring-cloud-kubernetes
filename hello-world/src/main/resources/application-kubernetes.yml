@@ -1,0 +1,4 @@
+app:
+  message: this is a message from application-kubernetes.yml file
+
+

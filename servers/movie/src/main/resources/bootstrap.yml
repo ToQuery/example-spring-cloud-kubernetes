@@ -2,4 +2,9 @@
 spring:
   application:
     name: example-spring-cloud-kubernetes-server-movie
+  cloud:
+    kubernetes:
+      config:
+        sources:
+          - name: ${spring.application.name}
 

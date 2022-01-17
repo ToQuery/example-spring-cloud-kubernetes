@@ -15,7 +15,6 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -23,12 +22,10 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-public class HelloWorldRest {
+@RequestMapping("/test")
+public class TestRest {
 
-    @Resource
-    private AppConfig appConfig;
-
-    @Value("${spring.application.name:example-spring-cloud-kubernetes-hello-world}")
+    @Value("${spring.application.name:example-spring-cloud-kubernetes-server-ui}")
     private String appName;
 
     @Resource
@@ -38,7 +35,6 @@ public class HelloWorldRest {
     public Map<String, Object> hello() throws Exception {
         Map<String, Object> map = new TreeMap<>();
         map.put("app", "Hello World");
-        map.put("app.message", appConfig.getMessage());
         map.put("spring.application.name", appName);
         String ip = InetAddress.getLocalHost().getHostAddress();
         map.put("ip", ip);
@@ -72,11 +68,6 @@ public class HelloWorldRest {
         return ips;
     }
 
-
-    @RequestMapping("/configs/message")
-    public String configs() {
-        return appConfig.getMessage();
-    }
 
     @RequestMapping("/services")
     public List<String> services() {

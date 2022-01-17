@@ -1,7 +1,8 @@
 spring:
-  cloud:
-    kubernetes:
-      client:
-        namespace: example-spring-cloud-kubernetes
-      discovery:
-        all-namespaces: true
+  data:
+    mongodb:
+      host: mongodb.${spring.cloud.kubernetes.namespace}.svc.cluster.local
+      port: 27017
+      database: konga
+      username: test
+      password: test

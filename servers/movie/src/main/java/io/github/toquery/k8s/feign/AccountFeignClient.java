@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@FeignClient(name = "example-spring-cloud-kubernetes-server-account",fallback = AccountFeignClientFallback.class)
+@FeignClient(name = "example-spring-cloud-kubernetes-server-account", fallback = AccountFeignClientFallback.class)
 public interface AccountFeignClient {
 
 

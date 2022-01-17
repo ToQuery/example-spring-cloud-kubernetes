@@ -3,6 +3,7 @@ package io.github.toquery.k8s.resilience4j;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.github.toquery.k8s.dto.AccountDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,9 +15,9 @@ import java.util.List;
 @Component
 public class AccountServiceResilience4jClient {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-	public AccountServiceResilience4jClient(RestTemplate restTemplate) {
+	public AccountServiceResilience4jClient(@Qualifier(value = "accountRestTemplate") RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
 	/**

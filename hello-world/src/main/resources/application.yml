@@ -4,8 +4,6 @@ management:
       enabled: true
     health:
       enabled: true
-      probes:
-        enabled: true
     info:
       enabled: true
   endpoints:
@@ -22,10 +20,17 @@ server:
   shutdown: graceful
 
 app:
-  message: this is a message from yml file
+  message: this is a message from application.yml file
 
-#spring:
-#  cloud:
-#    kubernetes:
-#      client:
-#        masterUrl: https://localhost:6443
+spring:
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+        mode: event
+        period: 5000
+        strategy: restart_context
+      client:
+        namespace: example-spring-cloud-kubernetes-hello-world
+#      discovery:
+#        all-namespaces: true
