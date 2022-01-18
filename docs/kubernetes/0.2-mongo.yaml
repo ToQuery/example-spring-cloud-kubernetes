@@ -40,7 +40,7 @@ spec:
         - name: mongodb
           image: mongo:5.0.5
           imagePullPolicy: IfNotPresent
-          command: [ "mongod" ]
+#          command: [ "mongod" ]
           ports:
             - containerPort: 27017
           volumeMounts:
@@ -101,13 +101,13 @@ spec:
     storage: 2Gi
   volumeMode: Filesystem  # Filesystem（文件系统） Block（块）
   accessModes:
-    - ReadOnlyMany
-    - ReadWriteMany
+#    - ReadOnlyMany
+#    - ReadWriteMany
     - ReadWriteOnce       # 卷可以被一个节点以读写方式挂载
   persistentVolumeReclaimPolicy: Delete
   storageClassName: local-storage
   local:
-    path: /Users/toquery/data/mongo-data2 # 挂载的实际路径
+    path: /Users/toquery/data/mongo-data # 挂载的实际路径 todo 失败后再次执行，就成功了
   nodeAffinity:
     required:
       # 通过 hostname 限定在某个节点创建存储卷
@@ -124,7 +124,8 @@ metadata:
   name: mongodata
   namespace: example-spring-cloud-kubernetes
 spec:
-  accessModes: [ "ReadWriteOnce" ]
+  accessModes:
+    - ReadWriteOnce
   storageClassName: "local-storage"
   resources:
     requests:
