@@ -85,7 +85,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: 443
+      port: 1337
       targetPort: 1337
   selector:
     app: konga
@@ -94,8 +94,8 @@ kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: "nginx"
+#    nginx.ingress.kubernetes.io/ssl-redirect: "true"
   name: konga
   namespace: example-spring-cloud-kubernetes
 spec:
@@ -103,13 +103,13 @@ spec:
     - host: konga.local
       http:
         paths:
-          - path: /
+          - path: /konga
             pathType: Prefix
             backend:
               service:
                 name: konga
                 port:
-                  number: 443
+                  number: 1337
 
 #  tls:
 #    - hosts:
