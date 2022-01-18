@@ -32,4 +32,19 @@ spec:
         image: toquery/example-spring-cloud-kubernetes-hello-world:0.0.1
         ports:
         - containerPort: 8080
-
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 60
+          timeoutSeconds: 3
+          periodSeconds: 10
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 180
+          timeoutSeconds: 3
+          periodSeconds: 10
+          failureThreshold: 3
