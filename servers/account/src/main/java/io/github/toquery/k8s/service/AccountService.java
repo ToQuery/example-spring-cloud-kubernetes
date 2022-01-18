@@ -3,7 +3,6 @@ package io.github.toquery.k8s.service;
 
 import io.github.toquery.k8s.entity.AccountEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,9 +25,19 @@ public class AccountService {
         return new ArrayList<>(accounts.values());
     }
 
+    public List<AccountEntity> getAccountsDeplay(int seconds) {
+        try {
+            Thread.sleep( seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return this.getAccounts();
+    }
+
     public AccountEntity getAccount(int id) {
         return accounts.get(id);
     }
+
 
     public AccountEntity createAccount(AccountEntity accountEntity) {
         accounts.put(accountEntity.getId(), accountEntity);

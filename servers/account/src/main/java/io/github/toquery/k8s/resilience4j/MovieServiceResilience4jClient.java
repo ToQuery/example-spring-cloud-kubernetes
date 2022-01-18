@@ -26,11 +26,24 @@ public class MovieServiceResilience4jClient {
      */
     @Retry(name = "getMovies", fallbackMethod = "defaultGetMovies")
     public List<MovieDto> getMovies() {
-        MovieDto[] movies = restTemplate.getForObject("/movies", MovieDto[].class);
+        MovieDto[] movies = restTemplate.getForObject("/movie", MovieDto[].class);
         return Arrays.asList(movies);
     }
 
-    public List<MovieDto> defaultGetMovies() {
+    public List<MovieDto> defaultGetMovies(Throwable throwable) {
+        throwable.printStackTrace();
+        log.warn("Fallback method is called for getting movies");
+        return new ArrayList<MovieDto>();
+    }
+
+    @Retry(name = "getMoviesDelay", fallbackMethod = "defaultGetMoviesDelay")
+    public List<MovieDto> getMoviesDelay(int seconds) {
+        MovieDto[] movies = restTemplate.getForObject("/movie/deloy" + seconds, MovieDto[].class);
+        return Arrays.asList(movies);
+    }
+
+    public List<MovieDto> defaultGetMoviesDelay(Throwable throwable) {
+        throwable.printStackTrace();
         log.warn("Fallback method is called for getting movies");
         return new ArrayList<MovieDto>();
     }

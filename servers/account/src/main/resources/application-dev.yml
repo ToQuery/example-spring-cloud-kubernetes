@@ -1,2 +1,17 @@
 server:
-  port: 8013
+  port: 8011
+
+
+app:
+  clients:
+    movie: http://localhost:8012
+
+example-spring-cloud-kubernetes-server-movie:
+  ribbon:
+    listOfServers: http://localhost:8012
+
+spring:
+  cloud:
+    kubernetes:
+      loadbalancer:
+        enabled: false

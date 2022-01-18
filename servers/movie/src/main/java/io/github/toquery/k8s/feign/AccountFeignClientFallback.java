@@ -18,4 +18,10 @@ public class AccountFeignClientFallback implements AccountFeignClient {
         log.error("获取 AccountDto 失败。");
         return new ArrayList<>();
     }
+
+    @Override
+    public List<AccountDto> getAccountsDelay(int seconds) {
+        log.error("获取 AccountDto 失败。");
+        return new ArrayList<>();
+    }
 }

@@ -25,6 +25,15 @@ public class MovieService {
         return new ArrayList<>(movies.values());
     }
 
+    public List<MovieEntity> getMoviesDeplay(int seconds) {
+        try {
+            Thread.sleep( seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return this.getMovies();
+    }
+
     public MovieEntity createMovie(MovieEntity movieEntity) {
         movies.put(movieEntity.getId(), movieEntity);
         return movieEntity;

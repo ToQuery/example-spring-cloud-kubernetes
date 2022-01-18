@@ -1,2 +1,9 @@
 server:
   port: 8012
+
+app:
+  clients:
+    account: localhost:8011
+
+
+

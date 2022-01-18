@@ -25,11 +25,23 @@ public class AccountServiceResilience4jClient {
 	 */
 	@Retry(name = "getAccounts", fallbackMethod = "defaultGetAccounts")
 	public List<AccountDto> getAccounts() {
-		AccountDto[] accounts = restTemplate.getForObject("http://example-spring-cloud-kubernetes-server-account.example-spring-cloud-kubernetes.svc:8080/accounts", AccountDto[].class);
+		AccountDto[] accounts = restTemplate.getForObject("/accounts", AccountDto[].class);
 		return Arrays.asList(accounts);
 	}
 
-	public List<AccountDto> defaultGetAccounts() {
+	public List<AccountDto> defaultGetAccounts(Throwable throwable) {
+		throwable.printStackTrace();
+		log.warn("Fallback method is called for getting accounts");
+        return new ArrayList<AccountDto>();
+	}
+	@Retry(name = "getAccountsDelay", fallbackMethod = "defaultGetAccountsDelay")
+    public List<AccountDto> getAccountsDelay(int seconds) {
+		AccountDto[] accounts = restTemplate.getForObject("/accounts/delay/" + seconds, AccountDto[].class);
+		return Arrays.asList(accounts);
+    }
+
+	public List<AccountDto> defaultGetAccountsDelay(Throwable throwable) {
+		throwable.printStackTrace();
 		log.warn("Fallback method is called for getting accounts");
         return new ArrayList<AccountDto>();
 	}

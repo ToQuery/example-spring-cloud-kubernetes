@@ -1,0 +1,19 @@
+# nonk8s
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: k-s-demo-app--
+build:
+  artifacts:
+    - image: toquery/example-spring-cloud-kubernetes-hello-world:0.0.1
+      buildpacks:
+        builder: gcr.io/paketo-buildpacks/builder:base-platform-api-0.3
+        dependencies:
+          paths:
+            - src
+            - pom.xml
+deploy:
+  kubectl:
+    manifests:
+      - k8s/deployment.yaml
+      - k8s/service.yaml

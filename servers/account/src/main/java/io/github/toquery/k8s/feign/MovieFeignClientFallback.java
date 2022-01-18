@@ -17,4 +17,10 @@ public class MovieFeignClientFallback implements MovieFeignClient {
         log.error("获取 MovieDto 失败。");
         return new ArrayList<>();
     }
+
+    @Override
+    public List<MovieDto> getMoviesDelay(int seconds) {
+        log.error("获取 MovieDto 失败。");
+        return new ArrayList<>();
+    }
 }
