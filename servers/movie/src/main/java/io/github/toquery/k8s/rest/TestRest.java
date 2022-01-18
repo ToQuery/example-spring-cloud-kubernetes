@@ -1,4 +1,4 @@
-package io.github.toquery.k8s;
+package io.github.toquery.k8s.rest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class TestRest {
 
 
-    @Value("${spring.application.name:example-spring-cloud-kubernetes-account}")
+    @Value("${spring.application.name:example-spring-cloud-kubernetes-movie}")
     private String appName;
 
     @Resource

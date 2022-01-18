@@ -19,10 +19,24 @@
 |          |                          | 8090 | admin   |      |
 |          |                          | 8093 | zipkin  |      |
 
+```shell
+http://ingress.local/movie/account/feign
+http://ingress.local/account/movie/feign
+
+http://ingress.local/movie/account/feign/delay/5
+http://ingress.local/account/movie/feign/delay/5
+
+http://ingress.local/movie/account/resilience4j
+http://ingress.local/account/movie/resilience4j
+
+http://ingress.local/movie/account/resilience4j/delay/5
+http://ingress.local/account/movie/resilience4j/delay/5
+```
+
 
 ## 部署服务
 
-Kubernetes 暴露服务的方式目前只有三种：LoadBlancer Service、NodePort Service、Ingress
+Kubernetes 暴露服务的方式目前只有三种：LoadBlancer 、NodePort 、Ingress
 
 1. 通过 fabric8 插件部署。
 

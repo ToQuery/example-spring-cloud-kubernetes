@@ -77,6 +77,7 @@ spec:
   clusterIP: None # headless
   ports:
     - port: 27017
+      name: http
       protocol: TCP
       targetPort: 27017
   selector:

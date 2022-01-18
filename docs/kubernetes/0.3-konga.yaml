@@ -85,6 +85,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
+      name: http
       port: 1337
       targetPort: 1337
   selector:
