@@ -34,6 +34,28 @@ http://ingress.local/account/movie/resilience4j/delay/5
 ```
 
 
+```shell
+http://localhost:8011/account/movie/feign
+http://localhost:8012/movie/account/feign
+
+http://localhost:8011/account/movie/feign/delay/5
+http://localhost:8012/movie/account/feign/delay/5
+
+
+http://localhost:8011/account/movie/retry
+http://localhost:8012/movie/account/retry
+
+http://localhost:8011/account/movie/retry/delay/5
+http://localhost:8012/movie/account/retry/delay/5
+
+
+http://localhost:8011/account/movie/resilience4j
+http://localhost:8012/movie/account/resilience4j
+
+http://localhost:8011/account/movie/resilience4j/delay/5
+http://localhost:8012/movie/account/resilience4j/delay/5
+```
+
 ## 部署服务
 
 Kubernetes 暴露服务的方式目前只有三种：LoadBlancer 、NodePort 、Ingress

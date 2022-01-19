@@ -1,2 +1,8 @@
 server:
   port: 8013
+
+spring:
+  cloud:
+    kubernetes:
+      enabled: false
+

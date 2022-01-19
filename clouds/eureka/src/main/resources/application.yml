@@ -1,0 +1,12 @@
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+#
+#server:
+#  port: 8091
+

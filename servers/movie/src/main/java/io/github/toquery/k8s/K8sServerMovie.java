@@ -3,10 +3,8 @@ package io.github.toquery.k8s;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
-import io.github.toquery.k8s.properties.AppClientsProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
@@ -23,7 +21,6 @@ import java.time.Duration;
 @EnableFeignClients
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableConfigurationProperties({AppClientsProperties.class})
 public class K8sServerMovie {
 
     public static void main(String[] args) {
@@ -36,7 +33,7 @@ public class K8sServerMovie {
     @Bean
     @LoadBalanced
     public RestTemplate accountRestTemplate() {
-        return new RestTemplateBuilder().rootUri("http://example-spring-cloud-kubernetes-server-account.example-spring-cloud-kubernetes.svc:8080").build();
+        return new RestTemplateBuilder().rootUri("http://example-spring-cloud-kubernetes-server-account").build();
     }
 
     @Bean
@@ -45,6 +42,12 @@ public class K8sServerMovie {
                 .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(3)).build())
                 .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
                 .build());
+    }
+
+    @Bean
+    public Customizer<Resilience4JCircuitBreakerFactory> slowCustomizer() {
+        return factory -> factory.configure(builder -> builder.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
+                .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(2)).build()), "slow");
     }
 
 }

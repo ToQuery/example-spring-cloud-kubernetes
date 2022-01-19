@@ -13,11 +13,11 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class AccountServiceResilience4jClient {
+public class AccountResilience4jClient {
 
     private final RestTemplate restTemplate;
 
-	public AccountServiceResilience4jClient(@Qualifier(value = "accountRestTemplate") RestTemplate restTemplate) {
+	public AccountResilience4jClient(@Qualifier(value = "accountRestTemplate") RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
 	/**
@@ -25,7 +25,7 @@ public class AccountServiceResilience4jClient {
 	 */
 	@Retry(name = "getAccounts", fallbackMethod = "defaultGetAccounts")
 	public List<AccountDto> getAccounts() {
-		AccountDto[] accounts = restTemplate.getForObject("/accounts", AccountDto[].class);
+		AccountDto[] accounts = restTemplate.getForObject("/account", AccountDto[].class);
 		return Arrays.asList(accounts);
 	}
 
@@ -36,7 +36,7 @@ public class AccountServiceResilience4jClient {
 	}
 	@Retry(name = "getAccountsDelay", fallbackMethod = "defaultGetAccountsDelay")
     public List<AccountDto> getAccountsDelay(int seconds) {
-		AccountDto[] accounts = restTemplate.getForObject("/accounts/delay/" + seconds, AccountDto[].class);
+		AccountDto[] accounts = restTemplate.getForObject("/account/delay/" + seconds, AccountDto[].class);
 		return Arrays.asList(accounts);
     }
 

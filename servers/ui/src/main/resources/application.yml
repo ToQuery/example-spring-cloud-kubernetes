@@ -4,6 +4,8 @@ management:
       enabled: true
     health:
       enabled: true
+      probes:
+        enabled: true
     info:
       enabled: true
   endpoints:

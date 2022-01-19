@@ -2,8 +2,9 @@ package io.github.toquery.k8s.rest;
 
 import io.github.toquery.k8s.feign.AccountFeignClient;
 import io.github.toquery.k8s.dto.AccountDto;
-import io.github.toquery.k8s.resilience4j.AccountServiceResilience4jClient;
+import io.github.toquery.k8s.resilience4j.AccountResilience4jClient;
 import io.github.toquery.k8s.entity.MovieEntity;
+import io.github.toquery.k8s.retry.AccountRetryClient;
 import io.github.toquery.k8s.service.MovieService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,10 @@ public class MovieRest {
     private AccountFeignClient accountFeignClient;
 
     @Resource
-    private AccountServiceResilience4jClient accountServiceResilience4jClient;
+    private AccountRetryClient accountRetryClient;
+
+    @Resource
+    private AccountResilience4jClient accountServiceResilience4jClient;
 
     @Resource
     private MovieService movieService;
@@ -80,6 +84,16 @@ public class MovieRest {
     @GetMapping("/account/resilience4j/delay/{seconds}")
     public List<AccountDto> getAccountsDelayByResilience4j(@PathVariable int seconds) {
         return accountServiceResilience4jClient.getAccountsDelay(seconds);
+    }
+
+    @GetMapping("/account/retry")
+    public List<AccountDto> getAccountsByRetry() {
+        return accountRetryClient.getAccounts();
+    }
+
+    @GetMapping("/account/retry/delay/{seconds}")
+    public List<AccountDto> getAccountsDelayByRetry(@PathVariable int seconds) {
+        return accountRetryClient.getAccountsDelay(seconds);
     }
 
 }

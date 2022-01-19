@@ -1,5 +1,6 @@
 package io.github.toquery.k8s.resilience4j;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.github.toquery.k8s.dto.MovieDto;
 import lombok.extern.slf4j.Slf4j;
@@ -13,18 +14,21 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class MovieServiceResilience4jClient {
+public class MovieResilience4jClient {
 
     private final RestTemplate restTemplate;
+    private final String RETRY_NAME = "example-spring-cloud-kubernetes-server-account";
+    private final String CIRCUIT_BREAKER_NAME = "example-spring-cloud-kubernetes-server-account";
 
-    public MovieServiceResilience4jClient(@Qualifier(value = "movieRestTemplate") RestTemplate restTemplate) {
+    public MovieResilience4jClient(@Qualifier(value = "movieRestTemplate") RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     /**
      * {service-name}.{namespace}.svc.{cluster}.local:{service-port}
      */
-    @Retry(name = "getMovies", fallbackMethod = "defaultGetMovies")
+    @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "defaultGetMovies")
+    @Retry(name = RETRY_NAME, fallbackMethod = "defaultGetMovies")
     public List<MovieDto> getMovies() {
         MovieDto[] movies = restTemplate.getForObject("/movie", MovieDto[].class);
         return Arrays.asList(movies);
@@ -36,9 +40,10 @@ public class MovieServiceResilience4jClient {
         return new ArrayList<MovieDto>();
     }
 
-    @Retry(name = "getMoviesDelay", fallbackMethod = "defaultGetMoviesDelay")
+    @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "defaultGetMoviesDelay")
+    @Retry(name = RETRY_NAME, fallbackMethod = "defaultGetMoviesDelay")
     public List<MovieDto> getMoviesDelay(int seconds) {
-        MovieDto[] movies = restTemplate.getForObject("/movie/deloy" + seconds, MovieDto[].class);
+        MovieDto[] movies = restTemplate.getForObject("/movie/delay/" + seconds, MovieDto[].class);
         return Arrays.asList(movies);
     }
 

@@ -2,16 +2,23 @@ server:
   port: 8011
 
 
-app:
-  clients:
-    movie: http://localhost:8012
-
-example-spring-cloud-kubernetes-server-movie:
-  ribbon:
-    listOfServers: http://localhost:8012
-
 spring:
   cloud:
     kubernetes:
-      loadbalancer:
-        enabled: false
+      enabled: false
+
+    discovery:
+      client:
+        simple:
+          instances: # 手动指定服务地址
+            example-spring-cloud-kubernetes-server-movie:
+              - uri: http://localhost:8012
+
+  data:
+    mongodb:
+      host: 127.0.0.1
+      database: admin
+      username: admin
+      password: '123456'
+      authentication-database: admin
+

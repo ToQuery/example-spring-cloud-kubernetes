@@ -796,7 +796,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Resilience4J Dashboard",
+  "title": "Example Spring Cloud Kubernetes Resilience4J Dashboard",
   "uid": "cT25vjTZz",
   "version": 9
 }

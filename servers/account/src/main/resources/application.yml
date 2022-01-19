@@ -31,3 +31,15 @@ spring:
         strategy: restart_context
       client:
         namespace: example-spring-cloud-kubernetes
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      example-spring-cloud-kubernetes-server-account:
+        registerHealthIndicator: true
+        slidingWindowSize: 100
+  timelimiter:
+    instances:
+      example-spring-cloud-kubernetes-server-account:
+        timeoutDuration: 2s
+        cancelRunningFuture: true

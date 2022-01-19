@@ -1,9 +1,24 @@
 server:
   port: 8012
 
-app:
-  clients:
-    account: localhost:8011
 
+spring:
+  cloud:
+    kubernetes:
+      enabled: false
 
+    discovery:
+      client:
+        simple:
+          instances: # 手动指定服务地址
+            example-spring-cloud-kubernetes-server-account:
+              - uri: http://localhost:8011
+
+  data:
+    mongodb:
+      host: 127.0.0.1
+      database: admin
+      username: admin
+      password: '123456'
+      authentication-database: admin
 
