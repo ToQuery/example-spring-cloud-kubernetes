@@ -1,4 +1,4 @@
-FROM toquery/base-java-runner:0.0.1
+FROM toquery/s2i-java8-runner:0.0.1
 
 VOLUME /tmp
 EXPOSE 8093
