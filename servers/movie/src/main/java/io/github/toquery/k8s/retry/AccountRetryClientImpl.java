@@ -38,8 +38,4 @@ public class AccountRetryClientImpl implements AccountRetryClient {
         return Arrays.asList(accounts);
     }
 
-    @Override
-    public List<AccountDto> getAccountsDelayFallback(RuntimeException runtimeException) {
-        return new ArrayList<AccountDto>();
-    }
 }

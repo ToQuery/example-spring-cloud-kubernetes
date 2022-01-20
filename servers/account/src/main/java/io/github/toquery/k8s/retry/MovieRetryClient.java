@@ -21,6 +21,4 @@ public interface MovieRetryClient {
     @Retryable(value = { Exception.class }, backoff = @Backoff(delay = 3000))
     List<MovieDto> getMoviesDelay(int seconds);
 
-    @Recover
-    List<MovieDto> getMoviesDelayFallback(RuntimeException runtimeException);
 }

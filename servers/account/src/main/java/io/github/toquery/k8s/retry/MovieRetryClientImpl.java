@@ -21,7 +21,6 @@ public class MovieRetryClientImpl implements MovieRetryClient {
         this.restTemplate = restTemplate;
     }
 
-
     @Override
     public List<MovieDto> getMovies() {
         MovieDto[] movies = restTemplate.getForObject("http://example-spring-cloud-kubernetes-server-movie/movie", MovieDto[].class);
@@ -39,8 +38,4 @@ public class MovieRetryClientImpl implements MovieRetryClient {
         return Arrays.asList(movies);
     }
 
-    @Override
-    public List<MovieDto> getMoviesDelayFallback(RuntimeException runtimeException) {
-        return new ArrayList<MovieDto>();
-    }
 }

@@ -13,7 +13,7 @@ import java.util.Map;
 public class AccountService {
 
 
-    private static Map<Integer, AccountEntity> accounts = new HashMap<>();
+    private static final Map<Integer, AccountEntity> accounts = new HashMap<>();
 
     public AccountService() {
         accounts.put(1, new AccountEntity(1, "李逍遥", "18300010001"));
@@ -25,9 +25,9 @@ public class AccountService {
         return new ArrayList<>(accounts.values());
     }
 
-    public List<AccountEntity> getAccountsDeplay(int seconds) {
+    public List<AccountEntity> getAccountsDelay(int seconds) {
         try {
-            Thread.sleep( seconds * 1000);
+            Thread.sleep( seconds * 1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

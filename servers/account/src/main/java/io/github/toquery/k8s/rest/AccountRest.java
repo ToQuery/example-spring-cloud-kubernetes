@@ -40,16 +40,14 @@ public class AccountRest {
     @Resource
     private AccountService accountService;
 
-
-
     @GetMapping
     public List<AccountEntity> getAccounts() {
         return accountService.getAccounts();
     }
 
     @GetMapping("/delay/{seconds}")
-    public List<AccountEntity> getAccountsDeplay(@PathVariable int seconds) {
-        return accountService.getAccountsDeplay(seconds);
+    public List<AccountEntity> getAccountsDelay(@PathVariable int seconds) {
+        return accountService.getAccountsDelay(seconds);
     }
 
     @PostMapping
@@ -72,7 +70,6 @@ public class AccountRest {
     public void deleteAccount(@PathVariable int id) {
         accountService.deleteAccount(id);
     }
-
 
     @GetMapping("/movie/feign")
     public List<MovieDto> getMoviesByFeign() {

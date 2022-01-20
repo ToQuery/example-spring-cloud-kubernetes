@@ -35,11 +35,11 @@ spring:
 resilience4j:
   circuitbreaker:
     instances:
-      example-spring-cloud-kubernetes-server-account:
+      example-spring-cloud-kubernetes-server-movie:
         registerHealthIndicator: true
         slidingWindowSize: 100
   timelimiter:
     instances:
-      example-spring-cloud-kubernetes-server-account:
+      example-spring-cloud-kubernetes-server-movie:
         timeoutDuration: 2s
         cancelRunningFuture: true

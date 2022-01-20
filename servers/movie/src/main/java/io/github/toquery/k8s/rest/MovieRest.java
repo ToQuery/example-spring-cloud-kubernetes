@@ -40,8 +40,8 @@ public class MovieRest {
     }
 
     @GetMapping("/delay/{seconds}")
-    public List<MovieEntity> getMoviesDeplay(@PathVariable int seconds) {
-        return movieService.getMoviesDeplay(seconds);
+    public List<MovieEntity> getMoviesDelay(@PathVariable int seconds) {
+        return movieService.getMoviesDelay(seconds);
     }
 
     @PostMapping
@@ -53,8 +53,6 @@ public class MovieRest {
     public MovieEntity getMovie(@PathVariable int id) {
         return movieService.getMovie(id);
     }
-
-
 
     @PutMapping("/{id}")
     public MovieEntity updateMovie(@PathVariable int id, @RequestBody MovieEntity movieEntity) {

@@ -25,9 +25,9 @@ public class MovieService {
         return new ArrayList<>(movies.values());
     }
 
-    public List<MovieEntity> getMoviesDeplay(int seconds) {
+    public List<MovieEntity> getMoviesDelay(int seconds) {
         try {
-            Thread.sleep( seconds * 1000);
+            Thread.sleep( seconds * 1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

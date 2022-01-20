@@ -10,9 +10,11 @@ import java.util.List;
 
 @FeignClient(name = "example-spring-cloud-kubernetes-server-movie", fallback = MovieFeignClientFallback.class)
 public interface MovieFeignClient {
+
     @GetMapping("/movie")
     List<MovieDto> getMovies();
 
     @GetMapping("/movie/delay/{seconds}")
     List<MovieDto> getMoviesDelay(@PathVariable int seconds);
+
 }

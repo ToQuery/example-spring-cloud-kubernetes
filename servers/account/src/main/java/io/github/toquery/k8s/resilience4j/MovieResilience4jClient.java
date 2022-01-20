@@ -17,15 +17,16 @@ import java.util.List;
 public class MovieResilience4jClient {
 
     private final RestTemplate restTemplate;
-    private final String RETRY_NAME = "example-spring-cloud-kubernetes-server-account";
-    private final String CIRCUIT_BREAKER_NAME = "example-spring-cloud-kubernetes-server-account";
+
+    private final String RETRY_NAME = "example-spring-cloud-kubernetes-server-movie";
+    private final String CIRCUIT_BREAKER_NAME = "example-spring-cloud-kubernetes-server-movie";
 
     public MovieResilience4jClient(@Qualifier(value = "movieRestTemplate") RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     /**
-     * {service-name}.{namespace}.svc.{cluster}.local:{service-port}
+     *
      */
     @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "defaultGetMovies")
     @Retry(name = RETRY_NAME, fallbackMethod = "defaultGetMovies")
@@ -34,23 +35,16 @@ public class MovieResilience4jClient {
         return Arrays.asList(movies);
     }
 
-    public List<MovieDto> defaultGetMovies(Throwable throwable) {
-        throwable.printStackTrace();
-        log.warn("Fallback method is called for getting movies");
-        return new ArrayList<MovieDto>();
-    }
-
-    @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "defaultGetMoviesDelay")
-    @Retry(name = RETRY_NAME, fallbackMethod = "defaultGetMoviesDelay")
+    @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "defaultGetMovies")
+    @Retry(name = RETRY_NAME, fallbackMethod = "defaultGetMovies")
     public List<MovieDto> getMoviesDelay(int seconds) {
         MovieDto[] movies = restTemplate.getForObject("/movie/delay/" + seconds, MovieDto[].class);
         return Arrays.asList(movies);
     }
 
-    public List<MovieDto> defaultGetMoviesDelay(Throwable throwable) {
+    public List<MovieDto> defaultGetMovies(Throwable throwable) {
         throwable.printStackTrace();
         log.warn("Fallback method is called for getting movies");
         return new ArrayList<MovieDto>();
     }
-
 }

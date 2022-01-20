@@ -17,5 +17,4 @@ public class AccountEntity {
 
     private String phone;
 
-
 }

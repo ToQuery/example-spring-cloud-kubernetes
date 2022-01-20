@@ -21,6 +21,4 @@ public interface AccountRetryClient {
     @Retryable(value = { Exception.class }, backoff = @Backoff(delay = 3000))
     List<AccountDto> getAccountsDelay(int seconds);
 
-    @Recover
-    List<AccountDto> getAccountsDelayFallback(RuntimeException runtimeException);
 }
