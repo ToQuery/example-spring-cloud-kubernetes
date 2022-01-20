@@ -36,14 +36,20 @@ public class AccountResilience4jClient {
 		return Arrays.asList(accounts);
 	}
 
-	@CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "defaultGetAccounts")
-	@Retry(name = RETRY_NAME, fallbackMethod = "defaultGetAccounts")
+	public List<AccountDto> defaultGetAccounts(Throwable throwable) {
+		throwable.printStackTrace();
+		log.warn("Fallback method is called for getting accounts");
+		return new ArrayList<AccountDto>();
+	}
+
+	@CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "defaultGetAccountsDelay")
+	@Retry(name = RETRY_NAME, fallbackMethod = "defaultGetAccountsDelay")
     public List<AccountDto> getAccountsDelay(int seconds) {
 		AccountDto[] accounts = restTemplate.getForObject("/account/delay/" + seconds, AccountDto[].class);
 		return Arrays.asList(accounts);
     }
 
-	public List<AccountDto> defaultGetAccounts(Throwable throwable) {
+	public List<AccountDto> defaultGetAccountsDelay(int seconds, Throwable throwable) {
 		throwable.printStackTrace();
 		log.warn("Fallback method is called for getting accounts");
 		return new ArrayList<AccountDto>();

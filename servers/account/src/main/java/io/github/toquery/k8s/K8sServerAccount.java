@@ -41,16 +41,26 @@ public class K8sServerAccount {
 
     @Bean
     public Customizer<Resilience4JCircuitBreakerFactory> defaultCustomizer() {
+        TimeLimiterConfig timeLimiterConfig = TimeLimiterConfig.custom()
+                .timeoutDuration(Duration.ofSeconds(3))
+                .build();
+        CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig.custom()
+                .failureRateThreshold(50)
+                .waitDurationInOpenState(Duration.ofMillis(1000))
+                .slidingWindowSize(2)
+                .build();
+
         return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-                .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(3)).build())
-                .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
+                .timeLimiterConfig(timeLimiterConfig)
+                .circuitBreakerConfig(circuitBreakerConfig)
                 .build());
     }
+
 
     @Bean
     public Customizer<Resilience4JCircuitBreakerFactory> slowCustomizer() {
         return factory -> factory.configure(builder -> builder.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
-                .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(2)).build()), "slow");
+                .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(2)).build()), "example-spring-cloud-kubernetes-server-movie");
     }
 
 //    @Bean

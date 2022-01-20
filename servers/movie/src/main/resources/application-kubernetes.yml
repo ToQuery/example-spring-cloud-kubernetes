@@ -1,7 +1,3 @@
-app:
-  clients:
-    account: example-spring-cloud-kubernetes-server-account.${spring.cloud.kubernetes.namespace}.svc.cluster.local:8080
-
 
 spring:
   data:

@@ -35,14 +35,20 @@ public class MovieResilience4jClient {
         return Arrays.asList(movies);
     }
 
-    @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "defaultGetMovies")
-    @Retry(name = RETRY_NAME, fallbackMethod = "defaultGetMovies")
+    public List<MovieDto> defaultGetMovies(Throwable throwable) {
+        throwable.printStackTrace();
+        log.warn("Fallback method is called for getting movies");
+        return new ArrayList<MovieDto>();
+    }
+
+    @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "defaultGetMoviesDelay")
+    @Retry(name = RETRY_NAME, fallbackMethod = "defaultGetMoviesDelay")
     public List<MovieDto> getMoviesDelay(int seconds) {
         MovieDto[] movies = restTemplate.getForObject("/movie/delay/" + seconds, MovieDto[].class);
         return Arrays.asList(movies);
     }
 
-    public List<MovieDto> defaultGetMovies(Throwable throwable) {
+    public List<MovieDto> defaultGetMoviesDelay(int seconds, Throwable throwable) {
         throwable.printStackTrace();
         log.warn("Fallback method is called for getting movies");
         return new ArrayList<MovieDto>();
