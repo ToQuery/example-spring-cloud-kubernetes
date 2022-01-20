@@ -6,7 +6,7 @@ metadata:
   labels:
     app: example-spring-cloud-kubernetes-hello-world
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 8080
   selector:

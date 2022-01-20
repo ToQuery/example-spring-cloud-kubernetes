@@ -7,7 +7,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: example-spring-cloud-kubernetes-hello-world.localhost
+    - host: kubernetes-hello-world.toquery.com
       http:
         paths:
           - path: /

@@ -27,7 +27,7 @@ kubectl apply -f https://raw.githubusercontent.com/ToQuery/example-spring-cloud-
 kubectl get services example-spring-cloud-kubernetes-hello-world
 
 NAME                                          TYPE       CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
-example-spring-cloud-kubernetes-hello-world   NodePort   10.102.61.4   <none>        8080:31730/TCP   51m
+example-spring-cloud-kubernetes-hello-world   ClusterIP  10.102.61.4   <none>        8080:31730/TCP   51m
 ```
 
 这里有两种方式访问服务：
@@ -39,13 +39,13 @@ example-spring-cloud-kubernetes-hello-world   NodePort   10.102.61.4   <none>   
 ```shell script
 cat /etc/hosts
 
-127.0.0.1	example-spring-cloud-kubernetes-hello-world.localhost
+127.0.0.1	kubernetes-hello-world.toquery.com
 ```
 
-- 访问 `http://example-spring-cloud-kubernetes-hello-world.localhost` 即可 `Hello World`
-- 访问 `http://example-spring-cloud-kubernetes-hello-world.localhost/services` 可查看所有注册的服务
-- 访问 `http://example-spring-cloud-kubernetes-hello-world.localhost/services/{name}`  可查看 `name` 服务的信息
-- 访问 `http://example-spring-cloud-kubernetes-hello-world.localhost/configs/message` 获取项目配置信息，或k8s的config-map配置
+- 访问 `http://kubernetes-hello-world.toquery.com` 即可 `Hello World`
+- 访问 `http://kubernetes-hello-world.toquery.com/services` 可查看所有注册的服务
+- 访问 `http://kubernetes-hello-world.toquery.com/services/{name}`  可查看 `name` 服务的信息
+- 访问 `http://kubernetes-hello-world.toquery.com/configs/message` 获取项目配置信息，或k8s的config-map配置
 
 
 2. 通过 PORT 端口，例如： http://localhost:31730
