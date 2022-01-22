@@ -1,5 +1,6 @@
 package io.github.toquery.k8s;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
+@Timed(value = "hello-world", description = "hello world kubernetes")
 public class HelloWorldRest {
 
     @Resource

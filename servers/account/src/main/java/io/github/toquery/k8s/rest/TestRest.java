@@ -1,5 +1,6 @@
 package io.github.toquery.k8s.rest;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
+@RequestMapping("/test")
+@Timed(value = "example-spring-cloud-kubernetes-account-test", description = "Account Test 请求统计")
 public class TestRest {
 
 

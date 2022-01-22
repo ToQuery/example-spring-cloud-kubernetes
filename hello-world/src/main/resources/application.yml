@@ -11,13 +11,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: "*" # health,info,prometheus
   health:
     livenessState:
       enabled: true
     readinessState:
-      enabled: true
-    kubernetes:
       enabled: true
 
 server:

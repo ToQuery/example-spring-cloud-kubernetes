@@ -6,6 +6,7 @@ import io.github.toquery.k8s.resilience4j.AccountResilience4jClient;
 import io.github.toquery.k8s.entity.MovieEntity;
 import io.github.toquery.k8s.retry.AccountRetryClient;
 import io.github.toquery.k8s.service.MovieService;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @RequestMapping("/movie")
 @RestController
+@Timed(value = "example-spring-cloud-kubernetes-movie", description = "Movie 请求统计")
 public class MovieRest {
 
     @Resource

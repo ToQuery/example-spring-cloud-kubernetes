@@ -46,7 +46,7 @@ public class K8sServerAccount {
                 .build();
         CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig.custom()
                 .failureRateThreshold(50)
-                .waitDurationInOpenState(Duration.ofMillis(1000))
+                .waitDurationInOpenState(Duration.ofSeconds(1L))
                 .slidingWindowSize(2)
                 .build();
 

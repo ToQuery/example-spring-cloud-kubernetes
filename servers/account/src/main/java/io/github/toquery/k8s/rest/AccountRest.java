@@ -7,6 +7,7 @@ import io.github.toquery.k8s.feign.MovieFeignClient;
 import io.github.toquery.k8s.resilience4j.MovieResilience4jClient;
 import io.github.toquery.k8s.retry.MovieRetryClient;
 import io.github.toquery.k8s.service.AccountService;
+import io.micrometer.core.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @RestController
 @RequestMapping("/account")
+@Timed(value = "example-spring-cloud-kubernetes-account", description = "Account 请求统计")
 public class AccountRest {
 
     @Resource
@@ -87,7 +90,7 @@ public class AccountRest {
     }
 
     @GetMapping("/movie/resilience4j/delay/{seconds}")
-    public List<MovieDto> getMoviesDelayByResilience4j(@PathVariable int seconds) {
+    public List<MovieDto> getMoviesDelayByResilience4j(@PathVariable int seconds) throws ExecutionException, InterruptedException {
         return movieServiceResilience4jClient.getMoviesDelay(seconds);
     }
 
