@@ -58,20 +58,7 @@ http://localhost:8012/movie/account/resilience4j/delay/5
 
 ## 部署服务
 
-Kubernetes 暴露服务的方式目前只有三种：LoadBlancer 、NodePort 、Ingress
-
-1. 通过 fabric8 插件部署。
-
-```shell script
-cd servers/account
-mvn clean package fabric8:deploy
-```
-
-```shell script
-kubectl get services example-spring-cloud-kubernetes-server-account
-```
-
-2. 通过yaml 文件部署，
+1. 通过yaml 文件部署，
 
 ```shell script
 cd docs/k8s
@@ -84,5 +71,15 @@ kubectl create -f .
 kubectl delete -f .
 ```
 
+1. 通过 fabric8 插件部署。
+
+```shell script
+cd servers/account
+mvn clean package fabric8:deploy
+```
+
+```shell script
+kubectl get services example-spring-cloud-kubernetes-server-account
+```
 
 

@@ -91,7 +91,7 @@ public class AccountRest {
 
     @GetMapping("/movie/resilience4j/delay/{seconds}")
     public List<MovieDto> getMoviesDelayByResilience4j(@PathVariable int seconds) throws ExecutionException, InterruptedException {
-        return movieServiceResilience4jClient.getMoviesDelay(seconds);
+        return movieServiceResilience4jClient.getMoviesDelay(seconds).get();
     }
 
     @GetMapping("/movie/retry")

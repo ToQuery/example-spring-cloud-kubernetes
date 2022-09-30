@@ -22,6 +22,9 @@ server:
   shutdown: graceful
 
 spring:
+  profiles:
+    active:
+    - dev
   cloud:
     kubernetes:
       reload:
@@ -35,49 +38,52 @@ feign:
   circuitbreaker:
     enabled: true
 
-resilience4j.circuitbreaker:
-  configs:
-    default:
-      slidingWindowSize: 4
-      permittedNumberOfCallsInHalfOpenState: 10
-      waitDurationInOpenState: 10000
-      failureRateThreshold: 60
-      eventConsumerBufferSize: 10
-      registerHealthIndicator: true
-    someShared:
-      slidingWindowSize: 3
-      permittedNumberOfCallsInHalfOpenState: 10
+resilience4j:
+  # 熔断器
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 4
+        permittedNumberOfCallsInHalfOpenState: 10
+        waitDurationInOpenState: 10000
+        failureRateThreshold: 60
+        eventConsumerBufferSize: 10
+        registerHealthIndicator: true
+      someShared:
+        slidingWindowSize: 3
+        permittedNumberOfCallsInHalfOpenState: 10
 
-  instances:
-    example-spring-cloud-kubernetes-server-movie:
-      registerHealthIndicator: true
-      slidingWindowSize: 10
-      minimumNumberOfCalls: 10
-      permittedNumberOfCallsInHalfOpenState: 3
-      waitDurationInOpenState: 3s
-      slowCallDurationThreshold: 3s
-      maxWaitDurationInHalfOpenState: 3s
-      exponentialMaxWaitDurationInOpenState: 3s
-      failureRateThreshold: 50
-      eventConsumerBufferSize: 10
-#      recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
+    instances:
+      example-spring-cloud-kubernetes-server-movie:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 10
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 3s
+        slowCallDurationThreshold: 3s
+        maxWaitDurationInHalfOpenState: 3s
+        exponentialMaxWaitDurationInOpenState: 3s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+  #      recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
 
-resilience4j.timelimiter:
-  configs:
-    default:
-      slidingWindowSize: 4
-      permittedNumberOfCallsInHalfOpenState: 10
-      waitDurationInOpenState: 10000
-      failureRateThreshold: 60
-      eventConsumerBufferSize: 10
-      registerHealthIndicator: true
-    someShared:
-      slidingWindowSize: 3
-      permittedNumberOfCallsInHalfOpenState: 10
-  instances:
-    example-spring-cloud-kubernetes-server-movie:
-      timeoutDuration: 2s
-      cancelRunningFuture: true
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 2s
+        slidingWindowSize: 4
+        permittedNumberOfCallsInHalfOpenState: 10
+        waitDurationInOpenState: 10000
+        failureRateThreshold: 60
+        eventConsumerBufferSize: 10
+        registerHealthIndicator: true
+      someShared:
+        slidingWindowSize: 3
+        permittedNumberOfCallsInHalfOpenState: 10
+    instances:
+      example-spring-cloud-kubernetes-server-movie:
+        timeoutDuration: 2s
+        cancelRunningFuture: true
 
 logging:
   level:

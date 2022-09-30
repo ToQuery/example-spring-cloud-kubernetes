@@ -22,6 +22,9 @@ server:
   shutdown: graceful
 
 spring:
+  profiles:
+    active:
+    - dev
   cloud:
     kubernetes:
       reload:
@@ -33,12 +36,36 @@ spring:
         namespace: example-spring-cloud-kubernetes
 
 resilience4j:
+  # 熔断器
   circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 4
+        permittedNumberOfCallsInHalfOpenState: 10
+        waitDurationInOpenState: 10000
+        failureRateThreshold: 60
+        eventConsumerBufferSize: 10
+        registerHealthIndicator: true
+      someShared:
+        slidingWindowSize: 3
+        permittedNumberOfCallsInHalfOpenState: 10
     instances:
       example-spring-cloud-kubernetes-server-account:
         registerHealthIndicator: true
         slidingWindowSize: 100
   timelimiter:
+    configs:
+      default:
+        timeoutDuration: 2s
+        slidingWindowSize: 4
+        permittedNumberOfCallsInHalfOpenState: 10
+        waitDurationInOpenState: 10000
+        failureRateThreshold: 60
+        eventConsumerBufferSize: 10
+        registerHealthIndicator: true
+      someShared:
+        slidingWindowSize: 3
+        permittedNumberOfCallsInHalfOpenState: 10
     instances:
       example-spring-cloud-kubernetes-server-account:
         timeoutDuration: 2s

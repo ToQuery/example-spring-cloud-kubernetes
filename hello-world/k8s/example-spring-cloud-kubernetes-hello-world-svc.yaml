@@ -26,6 +26,11 @@ spec:
     metadata:
       labels:
         app: example-spring-cloud-kubernetes-hello-world
+      annotations:
+        # 监控
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
     spec:
       containers:
       - name: example-spring-cloud-kubernetes-hello-world

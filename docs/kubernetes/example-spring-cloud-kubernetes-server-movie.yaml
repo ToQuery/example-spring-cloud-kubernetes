@@ -14,7 +14,7 @@ spec:
     app: example-spring-cloud-kubernetes-server-movie
 ---
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
   name: example-spring-cloud-kubernetes-server-movie
   namespace: example-spring-cloud-kubernetes
@@ -27,6 +27,11 @@ spec:
     metadata:
       labels:
         app: example-spring-cloud-kubernetes-server-movie
+      annotations:
+        # 监控
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
     spec:
       # hostNetwork: true # 使用hostNetwork暴露服务
       containers:

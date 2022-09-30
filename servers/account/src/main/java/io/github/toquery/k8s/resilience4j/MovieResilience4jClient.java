@@ -21,7 +21,7 @@ public class MovieResilience4jClient {
 
     private final RestTemplate restTemplate;
 
-    private final String BACKEND_NAME = "example-spring-cloud-kubernetes-server-movie";
+    public static final String BACKEND_NAME = "example-spring-cloud-kubernetes-server-movie";
 
     public MovieResilience4jClient(@Qualifier(value = "movieRestTemplate") RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -46,18 +46,25 @@ public class MovieResilience4jClient {
     }
 
 
-    @Bulkhead(name = BACKEND_NAME,type = Bulkhead.Type.THREADPOOL)
-//    @TimeLimiter(name = BACKEND_NAME) // 必须配合 CompletableFuture<List<MovieDto>> CompletableFuture.completedFuture(Arrays.asList(movies));
-    @CircuitBreaker(name = BACKEND_NAME, fallbackMethod = "defaultGetMoviesDelay")
-    @Retry(name = BACKEND_NAME, fallbackMethod = "defaultGetMoviesDelay")
-    public List<MovieDto> getMoviesDelay(int seconds) {
+    @Bulkhead(name = BACKEND_NAME, type = Bulkhead.Type.THREADPOOL)
+    @TimeLimiter(name = BACKEND_NAME, fallbackMethod = "defaultGetMoviesDelayFuture")
+    // 必须配合 CompletableFuture<List<MovieDto>> CompletableFuture.completedFuture(Arrays.asList(movies));
+    @CircuitBreaker(name = BACKEND_NAME, fallbackMethod = "defaultGetMoviesDelayFuture")
+    @Retry(name = BACKEND_NAME, fallbackMethod = "defaultGetMoviesDelayFuture")
+    public CompletableFuture<List<MovieDto>> getMoviesDelay(int seconds) {
         MovieDto[] movies = restTemplate.getForObject("/movie/delay/" + seconds, MovieDto[].class);
-        return Arrays.asList(movies);
+        return CompletableFuture.completedFuture(Arrays.asList(movies));
     }
 
     public List<MovieDto> defaultGetMoviesDelay(int seconds, Throwable throwable) {
         throwable.printStackTrace();
         log.warn("Fallback method is called for getting movies");
         return new ArrayList<MovieDto>();
+    }
+
+    public CompletableFuture<List<MovieDto>> defaultGetMoviesDelayFuture(int seconds, Throwable throwable) {
+        throwable.printStackTrace();
+        log.warn("CompletableFuture Fallback method is called for getting movies");
+        return CompletableFuture.completedFuture(this.defaultGetMoviesDelay(seconds, throwable));
     }
 }
