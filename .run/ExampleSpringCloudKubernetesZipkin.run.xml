@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="ExampleSpringCloudKubernetesZipkin" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <module name="example-spring-cloud-kubernetes-cloud-zipkin" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.toquery.k8s.ExampleSpringCloudKubernetesZipkin" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.toquery.example.spring.cloud.kubernetes.zipkin.ExampleSpringCloudKubernetesZipkin" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
