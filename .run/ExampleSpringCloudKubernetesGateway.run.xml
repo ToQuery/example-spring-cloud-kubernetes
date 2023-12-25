@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ExampleSpringCloudKubernetesGateway" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <module name="example-spring-cloud-kubernetes-cloud-gateway" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.toquery.k8s.ExampleSpringCloudKubernetesGateway" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
