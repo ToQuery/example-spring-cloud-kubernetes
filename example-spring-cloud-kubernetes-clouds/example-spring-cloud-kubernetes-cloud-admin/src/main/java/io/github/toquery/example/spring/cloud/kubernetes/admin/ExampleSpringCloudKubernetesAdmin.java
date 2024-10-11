@@ -1,4 +1,4 @@
-package io.github.toquery.k8s;
+package io.github.toquery.example.spring.cloud.kubernetes.admin;
 
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;

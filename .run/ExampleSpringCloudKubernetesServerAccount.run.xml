@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="ExampleSpringCloudKubernetesServerAccount" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <module name="example-spring-cloud-kubernetes-server-account" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.toquery.k8s.ExampleSpringCloudKubernetesServerAccount" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.toquery.example.spring.cloud.kubernetes.server.account.ExampleSpringCloudKubernetesServerAccount" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
